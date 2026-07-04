@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Стандарт упаковки</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Inter', -apple-system, sans-serif;
+            background: linear-gradient(145deg, #f9f9f9 0%, #f0f0f0 100%);
+            display: flex; justify-content: center; align-items: center;
+            min-height: 100vh; padding: 20px;
+        }
+
+        .container {
+            max-width: 1100px; width: 100%;
+            background-color: #ffffff; border-radius: 32px;
+            padding: 40px 45px 50px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.8);
+            position: relative; overflow: hidden;
+            display: none;
+        }
+
+        .container::before {
+            content: ''; position: absolute; top: 0; left: 0;
+            width: 100%; height: 6px;
+            background: linear-gradient(90deg, #800000 0%, #C74100 100%);
+        }
+
+        /* --- Header --- */
+        .header {
+            display: flex; justify-content: space-between; align-items: center;
+            margin-bottom: 25px; padding-bottom: 20px;
+            border-bottom: 1px solid #F5F5DC; flex-wrap: wrap; gap: 15px;
+        }
+
+        .header-title { font-size: 30px; font-weight: 700; letter-spacing: -0.5px; color: #1a1a1a; }
+        .header-right-group { display: flex; align-items: center; gap: 15px; }
+        .header-standard-pill { display: flex; align-items: center; gap: 12px; background: #800000; padding: 8px 20px 8px 16px; border-radius: 40px; }
+        .header-standard-pill span { color: #ffffff; font-size: 14px; font-weight: 500; letter-spacing: 0.5px; }
+        .header-standard-pill .date { color: #f1f1f1; font-weight: 400; font-size: 13px; opacity: 0.8; margin-left: 4px; }
+        .header-logo-img { height: 45px; width: auto; object-fit: contain; }
+
+        /* --- Banner --- */
+        .training-banner {
+            background: #F5F5DC; border-radius: 60px; padding: 12px 20px; margin-bottom: 35px;
+            display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 15px;
+            border: 1px solid #CCCCCC; box-shadow: 0 4px 15px rgba(0,0,0,0.02);
+        }
+        .banner-text { display: flex; align-items: center; gap: 10px; font-weight: 600; color: #1a1a1a; }
+        .banner-text i { color: #C74100; font-size: 18px; }
+
+        /* --- Кнопка --- */
+        .btn-wrapper {
+            --width: 180px; --height: 48px; --padding: 6px;
+            --border-radius: 24px; --dot-size: 8px;
+            --btn-color: #e4e4e4; --hue: 350deg; --animation-duration: 1.2s;
+
+            position: relative; display: flex; align-items: center; justify-content: center;
+            width: var(--width); height: var(--height);
+            border-radius: var(--border-radius); border: none;
+            background-color: #00000008;
+            box-shadow: 1px 1px 2px 0 #fffd, 2px 2px 2px #0001 inset, 2px 2px 4px #0001 inset, 2px 2px 8px #0001 inset;
+            transition: box-shadow 50ms linear; perspective: 150px; perspective-origin: center;
+            user-select: none; z-index: 1;
+        }
+
+        .btn {
+            display: flex; align-items: center; justify-content: start; gap: 0.25em; text-align: left;
+            padding: 0 var(--height) 0 calc(var(--padding) * 2);
+            width: calc(100% - 2 * var(--padding)); height: calc(100% - 2 * var(--padding));
+            border-radius: calc(var(--border-radius) - var(--padding)); border: none; cursor: pointer;
+            background: linear-gradient(#fff2, #0001), var(--btn-color);
+            box-shadow: 1px 1px 2px -1px #fff inset, 0 2px 1px #00000010, 0 4px 2px #00000010, 0 8px 4px #00000010, 0 16px 8px #00000010, 0 32px 16px #00000010;
+            transition: transform 0.25s cubic-bezier(0.25, 1.5, 0.5, 2.2), box-shadow 0.25s cubic-bezier(0.25, 1.5, 0.5, 1), filter 0.3s cubic-bezier(0.25, 1.5, 0.5, 1);
+            will-change: transform, filter; z-index: 2;
+        }
+
+        .btn-txt { display: inline-block; font-size: 15px; font-weight: 600; font-family: "Inter", "Montserrat", sans-serif; color: #5550; background-image: linear-gradient(#000a, #555); background-clip: text; filter: drop-shadow(0 1px 0px #fff) drop-shadow(0 -1px 0px #0005); }
+        
+        .dot { position: absolute; top: calc(50% - var(--dot-size) / 2); right: calc(var(--height) / 2 - var(--padding) / 2); width: var(--dot-size); aspect-ratio: 1 / 1; border-radius: 50%; background-color: hsla(var(--hue), 0%, 50%, 0.1); border: 1px solid hsla(var(--hue), 0%, 60%, 0.6); box-sizing: border-box; box-shadow: 1px 1px 2px -1px #fffe inset, 0 2px 1px #00000010, 0 4px 2px #00000010, 0 8px 4px #00000010; pointer-events: none; z-index: 3; }
+        .dot::before { content: ""; position: absolute; top: calc(var(--padding) / -2); left: calc(var(--padding) / -2); width: calc(100% + var(--padding)); height: calc(100% + var(--padding)); border-radius: inherit; background-color: #0006; mask-image: radial-gradient(circle at 50% 60%, transparent 50%, black); }
+        .dot::after { content: ""; position: absolute; top: calc(var(--padding) / -2); left: calc(var(--padding) / -2); width: calc(100% + var(--padding)); height: calc(100% + var(--padding)); border-radius: inherit; background-color: #0000; box-shadow: 0 0 10px 2px hsla(var(--hue), 80%, 50%, 0.3), 0 0 20px 10px hsla(var(--hue), 80%, 50%, 0.5), 0 0 50px 20px hsla(var(--hue), 80%, 50%, 0.5), 0 0 16px 1px hsla(var(--hue), 100%, 60%, 0.9) inset; opacity: 0; }
+        .pulse { transition: transform 200ms ease-in; }
+        .pulse.dot { animation: bg-anim var(--animation-duration) ease-in-out infinite; }
+        .pulse::after { animation: opacity-anim var(--animation-duration) ease-in-out infinite; }
+        @keyframes bg-anim { 0%, 100% { background-color: hsla(var(--hue), 50%, 50%, 0); } 50% { background-color: hsla(var(--hue), 100%, 50%, 1); } }
+        @keyframes opacity-anim { 0%, 100% { opacity: 0; } 50% { opacity: 1; } }
+        .btn:hover, .btn:focus-visible { filter: drop-shadow( var(--padding) 0 var(--padding) hsla(var(--hue), 70%, 60%, 0.6) ); transform: translate3d(0, -2px, 2px); .btn-txt { background-color: hsla(var(--hue), 50%, 50%, 1); background-image: none; } .pulse.dot { animation: none; background-color: hsla(var(--hue), 100%, 50%, 1); } .pulse::after { animation: none; opacity: 1; } }
+        .btn:focus-visible { outline: 2px dashed hsla(var(--hue), 70%, 40%, 1); outline-offset: var(--padding); }
+        .btn:active { filter: drop-shadow( var(--padding) 0 var(--padding) hsla(var(--hue), 100%, 50%, 1) ); transform: translate3d(0, 0, -4px); .btn-txt { background-color: hsla(var(--hue), 50%, 50%, 1); } ~ .dot { animation-play-state: paused; background-color: hsla(var(--hue), 100%, 50%, 1); } }
+        .btn-wrapper:has(.btn:active) { box-shadow: 1px 1px 2px 0 #fff, 2px 2px 2px #0001 inset, 2px 2px 4px #0001 inset, 2px 2px 8px #0001 inset, 0 0 32px 2px hsla(var(--hue), 50%, 50%, 0.5) inset; }
+
+        /* --- Content --- */
+        .content { display: flex; gap: 40px; align-items: flex-start; flex-wrap: wrap; }
+        .card { flex: 1; min-width: 280px; background: #ffffff; border-radius: 24px; padding: 28px 30px; border: 1px solid #ededed; box-shadow: 0 8px 24px rgba(0, 0, 0, 0.03); display: flex; flex-direction: column; }
+        .card-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 25px; padding-bottom: 20px; border-bottom: 1px solid #f5f5f5; }
+        .badge-primary { background-color: #FF244C; color: #fff; padding: 8px 18px; border-radius: 30px; font-size: 13px; font-weight: 600; display: inline-flex; align-items: center; gap: 8px; }
+        .badge-secondary { background-color: #F5F5DC; color: #C74100; padding: 8px 18px; border-radius: 30px; font-size: 13px; font-weight: 600; display: inline-flex; align-items: center; gap: 8px; }
+        .list-item { display: flex; align-items: center; padding: 14px 0; border-bottom: 1px solid #f5f5f5; gap: 15px; font-size: 15px; font-weight: 500; color: #1a1a1a; }
+        .list-item:last-child { border-bottom: none; }
+        .list-emoji { font-size: 22px; width: 32px; text-align: center; }
+        .highlight-red { color: #FF244C; font-weight: 600; }
+        .bold-text { font-weight: 700; color: #1a1a1a; }
+
+        .media-wrapper { flex: 1; min-width: 200px; max-width: 300px; display: flex; align-items: center; justify-content: center; }
+        .media-wrapper img { width: 100%; aspect-ratio: 9 / 16; object-fit: cover; border-radius: 20px; box-shadow: 0 15px 40px rgba(255, 36, 76, 0.08), 0 4px 12px rgba(0, 0, 0, 0.05); background: #F5F5DC; }
+
+        /* --- Modal (Мини-курс) --- */
+        .modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.7); backdrop-filter: blur(6px); z-index: 1000; justify-content: center; align-items: center; padding: 20px; animation: fadeIn 0.3s ease; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        .modal-content { background: #ffffff; max-width: 600px; width: 100%; border-radius: 30px; padding: 40px; box-shadow: 0 30px 80px rgba(0,0,0,0.3); position: relative; overflow: hidden; }
+        .modal-content::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 6px; background: linear-gradient(90deg, #800000 0%, #FF244C 100%); }
+        .modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+        .modal-title { font-weight: 700; font-size: 20px; color: #1a1a1a; }
+        .score-counter { background: #F5F5DC; padding: 6px 14px; border-radius: 30px; color: #C74100; font-weight: 700; font-size: 14px; border: 1px solid #CCCCCC; }
+        .progress-bar-wrapper { width: 100%; height: 6px; background: #CCCCCC; border-radius: 4px; margin-bottom: 30px; }
+        .progress-bar-fill { height: 100%; width: 10%; background: #FF244C; border-radius: 4px; transition: width 0.4s ease; }
+
+        .info-block { background: #fdfaf5; border-radius: 24px; padding: 25px; border: 1px solid #F5F5DC; margin-bottom: 10px; position: relative; }
+        .info-header { display: flex; align-items: center; gap: 15px; margin-bottom: 15px; }
+        .info-icon { width: 45px; height: 45px; background: #C74100; color: #fff; border-radius: 50%; display: flex; justify-content: center; align-items: center; font-size: 22px; }
+        .step-tag { background: #CCCCCC; color: #1a1a1a; font-size: 12px; font-weight: 700; padding: 4px 12px; border-radius: 20px; text-transform: uppercase; letter-spacing: 0.5px; }
+        .info-text { font-size: 15px; line-height: 1.6; color: #333; }
+        .infographic-list { display: flex; flex-direction: column; gap: 12px; margin-top: 15px; }
+        .infographic-item { background: #ffffff; padding: 14px 18px; border-radius: 16px; border-left: 4px solid #C74100; display: flex; align-items: center; gap: 12px; box-shadow: 0 2px 6px rgba(0,0,0,0.02); }
+        .infographic-item.border-red { border-left-color: #FF244C; }
+        .infographic-item i { font-size: 20px; width: 28px; text-align: center; color: #1a1a1a; }
+
+        .question-box h3 { font-size: 18px; font-weight: 600; color: #1a1a1a; margin-bottom: 20px; line-height: 1.5; }
+        .options-grid { display: flex; flex-direction: column; gap: 12px; }
+        .option-btn { padding: 14px 20px; background: #F5F5DC; border: 2px solid transparent; border-radius: 16px; font-weight: 500; font-size: 15px; text-align: left; color: #1a1a1a; cursor: pointer; transition: 0.2s; display: flex; align-items: center; gap: 10px; }
+        .option-btn:hover { background: #eaead2; border-color: #C74100; }
+        .option-btn.correct { background: #d4edda; border-color: #28a745; color: #155724; }
+        .option-btn.wrong { background: #f8d7da; border-color: #dc3545; color: #721c24; }
+        .option-btn:disabled { cursor: default; }
+        .feedback-box { margin-top: 20px; padding: 15px 20px; border-radius: 16px; font-weight: 500; display: none; }
+        .feedback-box.show { display: block; }
+        .feedback-box.success { background: #e8f5e9; color: #1e5f2a; border: 1px solid #a5d6a7; }
+        .feedback-box.fail { background: #ffebee; color: #b71c1c; border: 1px solid #ef9a9a; }
+        .modal-footer { margin-top: 30px; display: flex; justify-content: flex-end; }
+        .btn-next { background: #FF244C; color: #fff; border: none; padding: 10px 30px; border-radius: 40px; font-weight: 600; cursor: pointer; transition: 0.2s; display: none; }
+        .btn-next.show { display: inline-block; }
+        .btn-next:hover { background: #d91d3f; }
+        .btn-close-modal { background: #CCCCCC; color: #1a1a1a; border: none; padding: 10px 30px; border-radius: 40px; font-weight: 600; cursor: pointer; display: none; }
+        .btn-close-modal.show { display: inline-block; }
+
+        /* --- Экран выбора языка (с адаптивностью) --- */
+        .lang-select-overlay {
+            display: flex; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.6); backdrop-filter: blur(8px); z-index: 9999;
+            justify-content: center; align-items: center; padding: 20px;
+        }
+
+        .lang-select-container {
+            background: #ffffff; padding: 40px; border-radius: 40px; max-width: 550px; width: 100%;
+            box-shadow: 0 40px 80px rgba(0,0,0,0.3); text-align: center; position: relative; overflow: hidden;
+        }
+        .lang-select-container::before {
+            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 6px;
+            background: linear-gradient(90deg, #C74100 0%, #800000 100%);
+        }
+        .lang-select-title { font-family: 'Inter', sans-serif; font-size: 22px; font-weight: 700; color: #1a1a1a; margin-bottom: 8px; }
+        .lang-select-sub { font-size: 14px; color: #666; margin-bottom: 25px; }
+
+        .lang-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 12px;
+            justify-content: center;
+        }
+
+        .lang-btn {
+            display: flex; align-items: center; justify-content: center; gap: 8px;
+            background: #F5F5DC; padding: 14px 16px; border-radius: 60px; border: 2px solid transparent;
+            font-family: 'Inter', sans-serif; font-size: 15px; font-weight: 600; color: #1a1a1a;
+            cursor: pointer; transition: all 0.2s ease; box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+            text-align: center;
+        }
+        .lang-btn:hover { background: #eaead2; border-color: #C74100; transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
+        .lang-btn:active { transform: scale(0.96); }
+
+        @media (max-width: 1024px) {
+            .container { padding: 30px; }
+            .content { gap: 30px; }
+            .header-title { font-size: 26px; }
+            .lang-grid { grid-template-columns: repeat(3, 1fr); }
+        }
+
+        @media (max-width: 768px) {
+            .container { padding: 20px; border-radius: 24px; }
+            .header-title { font-size: 22px; }
+            .header { flex-direction: column; align-items: flex-start; }
+            .header-right-group { width: 100%; justify-content: space-between; }
+            .content { flex-direction: column-reverse; align-items: center; }
+            .media-wrapper { max-width: 220px; width: 100%; }
+            .training-banner { flex-direction: column; align-items: stretch; text-align: center; }
+            .btn-wrapper { margin: 0 auto; }
+            .lang-select-container { padding: 30px 20px; margin: 15px; }
+            .lang-select-title { font-size: 20px; }
+            .lang-grid { grid-template-columns: repeat(2, 1fr); }
+            .lang-btn:nth-child(3) { grid-column: 1 / span 2; }
+        }
+
+        @media (max-width: 480px) {
+            .container { padding: 15px; }
+            .header-title { font-size: 20px; }
+            .card { padding: 20px; }
+            .list-item { font-size: 14px; }
+            .modal-content { padding: 25px; }
+            .lang-select-container { padding: 20px 15px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Экран выбора языка -->
+    <div class="lang-select-overlay" id="langSelectionOverlay">
+        <div class="lang-select-container">
+            <div class="lang-select-title">🌍 Добро пожаловать!</div>
+            <div class="lang-select-sub">Пожалуйста, выберите ваш язык / Тилди тандаңыз / Tilni tanlang</div>
+            <div class="lang-grid">
+                <button class="lang-btn" onclick="setLanguage('ru')">🇷🇺 Русский</button>
+                <button class="lang-btn" onclick="setLanguage('ky')">🇰🇬 Кыргызча</button>
+                <button class="lang-btn" onclick="setLanguage('kz')">🇰🇿 Қазақша</button>
+                <button class="lang-btn" onclick="setLanguage('uz')">🇺🇿 O'zbek</button>
+                <button class="lang-btn" onclick="setLanguage('tj')">🇹🇯 Тоҷикӣ</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Основной контент -->
+    <div class="container" id="mainContainer">
+        <header class="header">
+            <h1 class="header-title" id="lbl_mainTitle">ТЕРМОСТИКЕР_ Роллы</h1>
+            <div class="header-right-group">
+                <div class="header-standard-pill">
+                    <span>СТАНДАРТ <span class="date">05.07.2026</span></span>
+                </div>
+                <div class="header-logo-container">
+                    <img src="logo.png" alt="ЯКИТОРИЯ" class="header-logo-img">
+                </div>
+            </div>
+        </header>
+
+        <div class="training-banner">
+            <div class="banner-text">
+                <i class="fa-solid fa-graduation-cap"></i> 
+                <span id="lbl_bannerText">Изучи стандарт упаковки</span>
+            </div>
+            <div class="btn-wrapper">
+              <button class="btn" id="startGameBtn">
+                <span class="btn-txt" id="lbl_btnTrain">Обучение</span>
+                <div class="dot pulse"></div>
+              </button>
+            </div>
+        </div>
+
+        <div class="content">
+            <div class="card">
+                <div class="card-top">
+                    <div class="badge-primary"><i class="fa-solid fa-star"></i> <span id="lbl_badgeStandard">СТАНДАРТ</span></div>
+                    <div class="badge-secondary"><i class="fa-solid fa-cubes"></i> <span id="lbl_badgeRolls">Роллы</span></div>
+                </div>
+                <div class="list-item"><span class="list-emoji">🍣</span><span id="lbl_row1">Для роллов (1 порция)</span></div>
+                <div class="list-item"><span class="list-emoji">🍱</span><span id="lbl_row2">в контейнерах <span class="highlight-red">ПК 34 и ПК 34/8</span></span></div>
+                <div class="list-item" style="flex-wrap: wrap;">
+                    <span class="list-emoji">🏷️</span>
+                    <span id="lbl_row3">Стикер на крышку, <strong class="bold-text">строго сбоку</strong> <span class="highlight-red">на стороне имбиря и васаби</span></span>
+                </div>
+            </div>
+            <div class="media-wrapper">
+                <img src="gif.gif" alt="Демонстрация упаковки роллов 9:16">
+            </div>
+        </div>
+    </div>
+
+    <!-- Модальное окно (Мини-курс) -->
+    <div class="modal-overlay" id="gameModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="modal-title" id="lbl_modalTitle">📦 Инструкция по стандарту</div>
+                <div class="score-counter"><span id="lbl_score">Очки:</span> <span id="scoreDisplay">0</span></div>
+            </div>
+            <div class="progress-bar-wrapper">
+                <div class="progress-bar-fill" id="progressFill"></div>
+            </div>
+            <div id="gameBody">
+                <!-- Подгружается через JS -->
+            </div>
+            <div class="modal-footer">
+                <button class="btn-next" id="nextBtn">Продолжить →</button>
+                <button class="btn-close-modal" id="closeGameBtn">Завершить</button>
+            </div>
+        </div>
+    </div>
+
+<script>
+    // --- 1. Объекты с переводами для статики и для курса ---
+    
+    const translations = {
+        ru: {
+            mainTitle: "ТЕРМОСТИКЕР_ Роллы",
+            bannerText: "Изучи стандарт упаковки",
+            btnTrain: "Обучение",
+            badgeStandard: "СТАНДАРТ",
+            badgeRolls: "Роллы",
+            row1: "Для роллов (1 порция)",
+            row2: "в контейнерах ",
+            row3: "Стикер на крышку, ",
+            modalTitle: "📦 Инструкция по стандарту",
+            score: "Очки:",
+            nextBtn: "Продолжить →",
+            completeBtn: "Завершить курс"
+        },
+        ky: {
+            mainTitle: "ТЕРМОСТИКЕР_ Роллдор",
+            bannerText: "Таңгактоо стандартын үйрөнүңүз",
+            btnTrain: "Окутуу",
+            badgeStandard: "СТАНДАРТ",
+            badgeRolls: "Роллдор",
+            row1: "Роллдор үчүн (1 порция)",
+            row2: "идиштеринде ",
+            row3: "Этикетканы капкакка, ",
+            modalTitle: "📦 Стандарт боюнча нускама",
+            score: "Упайлар:",
+            nextBtn: "Улантуу →",
+            completeBtn: "Курсту бүтүрүү"
+        },
+        uz: {
+            mainTitle: "ТЕРМОСТИКЕР_ Rollar",
+            bannerText: "Qadoqlash standartini o'rganing",
+            btnTrain: "Trening",
+            badgeStandard: "STANDART",
+            badgeRolls: "Rollar",
+            row1: "Rollar uchun (1 porsiya)",
+            row2: "konteynerlarda ",
+            row3: "Stiker qopqoqqa, ",
+            modalTitle: "📦 Standart bo'yicha yo'riqnoma",
+            score: "Ballar:",
+            nextBtn: "Davom etish →",
+            completeBtn: "Kursni yakunlash"
+        },
+        tj: {
+            mainTitle: "ТЕРМОСТИКЕР_ Роллҳо",
+            bannerText: "Стандарти бастабандиро омӯзед",
+            btnTrain: "Омӯзиш",
+            badgeStandard: "СТАНДАРТ",
+            badgeRolls: "Роллҳо",
+            row1: "Барои роллҳо (1 порсия)",
+            row2: "дар зарфҳои ",
+            row3: "Стикер ба сарпӯш, ",
+            modalTitle: "📦 Дастури стандарт",
+            score: "Холҳо:",
+            nextBtn: "Идома →",
+            completeBtn: "Курсро ба охир расондан"
+        },
+        kz: {
+            mainTitle: "ТЕРМОСТИКЕР_ Роллдар",
+            bannerText: "Қаптама стандартын зерттеңіз",
+            btnTrain: "Оқыту",
+            badgeStandard: "СТАНДАРТ",
+            badgeRolls: "Роллдар",
+            row1: "Роллдар үшін (1 порция)",
+            row2: "контейнерлерде ",
+            row3: "Стикер қақпаққа, ",
+            modalTitle: "📦 Стандарт бойынша нұсқаулық",
+            score: "Ұпайлар:",
+            nextBtn: "Жалғастыру →",
+            completeBtn: "Курсты аяқтау"
+        }
+    };
+
+    // Массивы для обучения
+    const gameStepsTranslations = {
+        ru: [
+            { type: 'welcome', title: 'Стандарт упаковки', content: 'Изучите главные правила размещения стикера. В конце ответьте на 3 вопроса.', stepName: 'Введение' },
+            { type: 'slide', stepName: 'Важность', title: 'Почему это важно? 🧐', content: 'Упаковка — это первое впечатление гостя. Аккуратная наклейка и чистый вид контейнера, красивый вид блюда создают доверие к ресторану. Каждая деталь в приготовлении и сборке влияет на репутацию ресторана.', emoji: '' },
+            { type: 'slide', stepName: 'Инструкция', title: '3 простых правила 📋', content: `<div class="infographic-list"><div class="infographic-item border-red"><span style="font-size:22px;">📦</span><div><b>Контейнер:</b> Только роллы в ПК 34 и ПК 34/8.</div></div><div class="infographic-item"><span style="font-size:22px;">📍</span><div><b>Место:</b> Исключительно на крышку.</div></div><div class="infographic-item border-red"><span style="font-size:22px;">👈</span><div><b>Расположение:</b> Строго сбоку, со стороны имбиря/васаби.</div></div></div>`, emoji: '' },
+            { type: 'question', question: 'Для каких контейнеров действует правило "стикер на крышку сбоку"?', options: ['Роллы ПК 36', 'Роллы ПК 34 и ПК 34/8', 'Роллы ПК 35'], correct: 1, success: '✅ Верно! Используем только ПК 34 и ПК 34/8.', fail: '❌ Ошибка. Стандарт: ПК 34 и ПК 34/8.' },
+            { type: 'question', question: 'Куда именно на упаковке нужно клеить стикер?', options: ['Сбоку или на дно контейнера', 'На крышку, строго сбоку, со стороны имбиря/васаби', 'По центру крышки'], correct: 1, success: '✅ Идеально! Клеим строго сбоку, со стороны имбиря/васаби.', fail: '❌ Место одно: крышка, строго сбоку, со стороны имбиря/васаби.' },
+            { type: 'slide', stepName: 'Ошибки', title: 'Если стикер испорчен 🛠️', content: 'Иногда наклейка может порваться. В такой ситуации <b>никогда не клеим её обратно</b>. Испорченный стикер выбрасывается, берется новый, целый. Внешний вид упаковки должен быть безупречным.', emoji: '' },
+            { type: 'question', question: 'Что делать, если стикер случайно испортился?', options: ['Расправить и приклеить обратно', 'Взять новый целый стикер', 'Оставить как есть'], correct: 1, success: '✅ Верно! Только новый стикер. Качество превыше всего.', fail: '❌ Берем новый стикер. Испорченные наклейки клеить нельзя.' },
+            { type: 'complete', stepName: 'Закрепление', title: '🎉 Вы завершили курс', content: 'Поздравляем! Вы прошли инструкцию и теперь знаете все правила: правильный контейнер, точное место наклейки и действия при ошибках. Аккуратность создает лучшее впечатление у гостя.', emoji: '' }
+        ],
+        ky: [
+            { type: 'welcome', title: 'Таңгактоо стандарты', content: 'Стикерди жайгаштыруунун негизги эрежелерин үйрөнүңүз. Аягында 3 суроого жооп бериңиз.', stepName: 'Киришүү' },
+            { type: 'slide', stepName: 'Маанилүүлүгү', title: 'Эмне үчүн бул маанилүү? 🧐', content: 'Таңгактоо — бул коноктун биринчи таасири. Таза стикер жана контейнердин таза көрүнүшү, тамактын кооз көрүнүшү ресторанга ишенимди жаратат. Ар бир даярдоо жана чогултуудагы деталь ресторандын репутациясына таасир этет.', emoji: '' },
+            { type: 'slide', stepName: 'Көрсөтмө', title: '3 жөнөкөй эреже 📋', content: `<div class="infographic-list"><div class="infographic-item border-red"><span style="font-size:22px;">📦</span><div><b>Контейнер:</b> Роллдор ПК 34 жана ПК 34/8 гана.</div></div><div class="infographic-item"><span style="font-size:22px;">📍</span><div><b>Орун:</b> Капкакка гана.</div></div><div class="infographic-item border-red"><span style="font-size:22px;">👈</span><div><b>Жайгашуусу:</b> Капталынан, имбирь/васаби жактан.</div></div></div>`, emoji: '' },
+            { type: 'question', question: '"Стикер капкактын капталына" эрежеси кайсы контейнерлерде колдонулат?', options: ['Роллдор ПК 36', 'Роллдор ПК 34 жана ПК 34/8', 'Роллдор ПК 35'], correct: 1, success: '✅ Туура! ПК 34 жана ПК 34/8 гана колдонобуз.', fail: '❌ Стандарт: ПК 34 жана ПК 34/8.' },
+            { type: 'question', question: 'Стикер таңгактын кайсы жерине чапталышы керек?', options: ['Контейнердин капталына же түбүнө', 'Капкакка, капталынан, имбирь/васаби жактан', 'Капкактын ортосуна'], correct: 1, success: '✅ Мыкты! Капталынан, имбирь/васаби жактан чаптайбыз.', fail: '❌ Орду: капкак, капталынан, имбирь/васаби жактан.' },
+            { type: 'slide', stepName: 'Каталар', title: 'Эгерде стикер бузулса 🛠️', content: 'Кээде стикер жыртылып калышы мүмкүн. Мындай учурда аны <b>эч качан</b> кайра чаптабайбыз. Бузулган стикер ыргытылып, жаңы, бүтүн стикер алынат. Таңгактын көрүнүшү кемчиликсиз болушу керек.', emoji: '' },
+            { type: 'question', question: 'Эгерде стикер кокусунан бузулса, эмне кылуу керек?', options: ['Түздөп, кайра чаптоо', 'Жаңы бүтүн стикер алуу', 'Калтыруу ошол бойдон'], correct: 1, success: '✅ Туура! Жаңы стикер гана. Сапат баарынан жогору.', fail: '❌ Жаңы стикер алабыз. Бузулгандарды чаптоого болбойт.' },
+            { type: 'complete', stepName: 'Бекемдөө', title: '🎉 Сиз курсту аяктадыңыз', content: 'Куттуктайбыз! Сиз бардык эрежелерди үйрөндүңүз: туура контейнер, стикердин так орду жана каталардагы аракеттер. Тактык конокто эң сонун таасир калтырат.', emoji: '' }
+        ],
+        uz: [
+            { type: 'welcome', title: 'Qadoqlash standarti', content: 'Stikerni joylashtirishning asosiy qoidalarini o‘rganing. Oxirida 3 ta savolga javob bering.', stepName: 'Kirish' },
+            { type: 'slide', stepName: 'Muhimligi', title: 'Nima uchun bu muhim? 🧐', content: 'Qadoqlash mehmonning birinchi taassurotidir. Chiroyli stiker, konteynerning toza ko\'rinishi va ovqatning chiroyli ko\'rinishi restoranga ishonch uyg\'otadi. Tayyorlash va yig\'ishdagi har bir tafsilot restoranning obro\'siga ta\'sir qiladi.', emoji: '' },
+            { type: 'slide', stepName: 'Yo‘riqnoma', title: '3 ta oddiy qoida 📋', content: `<div class="infographic-list"><div class="infographic-item border-red"><span style="font-size:22px;">📦</span><div><b>Konteyner:</b> Faqat PK 34 va PK 34/8 rollari.</div></div><div class="infographic-item"><span style="font-size:22px;">📍</span><div><b>Joy:</b> Faqat qopqoqda.</div></div><div class="infographic-item border-red"><span style="font-size:22px;">👈</span><div><b>Joylashuv:</b> Qat\'iy yon tomonda, zanjabil/vasabi tomonida.</div></div></div>`, emoji: '' },
+            { type: 'question', question: '"Stiker qopqoqning yon tomoniga" qoidasi qaysi konteynerlar uchun amal qiladi?', options: ['PK 36 rollari', 'PK 34 va PK 34/8 rollari', 'PK 35 rollari'], correct: 1, success: '✅ To‘g‘ri! Faqat PK 34 va PK 34/8 dan foydalanamiz.', fail: '❌ Standart: PK 34 va PK 34/8.' },
+            { type: 'question', question: 'Stiker qadoqning qayeriga yopishtirilishi kerak?', options: ['Konteynerning yoniga yoki tubiga', 'Qopqoqning yon tomoniga, zanjabil/vasabi tomonidan', 'Qopqoqning o‘rtasiga'], correct: 1, success: '✅ Ajoyib! Yon tomondan, zanjabil/vasabi tomoniga yopishtiramiz.', fail: '❌ Bitta joy: qopqoqning yon tomoni, zanjabil/vasabi tomoni.' },
+            { type: 'slide', stepName: 'Xatolar', title: 'Agar stiker buzilsa 🛠️', content: 'Ba’zida stiker yirtilib ketishi mumkin. Bunday holatda uni <b>hech qachon</b> qayta yopishtirmang. Buzilgan stiker tashlanadi va yangi, butun stiker olinadi. Qadoqning tashqi ko‘rinishi mukammal bo‘lishi kerak.', emoji: '' },
+            { type: 'question', question: 'Agar stiker tasodifan buzilsa, nima qilish kerak?', options: ['Tekislab, qayta yopishtirish', 'Yangi butun stiker olish', 'Shunday qoldirish'], correct: 1, success: '✅ To‘g‘ri! Faqat yangi stiker. Sifat hamma narsadan muhim.', fail: '❌ Yangi stiker olamiz. Buzilgan stikerlarni yopishtirib bo‘lmaydi.' },
+            { type: 'complete', stepName: 'Mustahkamlash', title: '🎉 Siz kursni tugatdingiz', content: 'Tabriklaymiz! Siz barcha qoidalarni o‘rgandingiz: to‘g‘ri konteyner, stikerning aniq joyi va xatolardagi harakatlar. Aniqlik mehmonda eng yaxshi taassurot qoldiradi.', emoji: '' }
+        ],
+        tj: [
+            { type: 'welcome', title: 'Стандарти бастабандӣ', content: 'Қоидаҳои асосии ҷойгиркунии стикерро омӯзед. Дар охир ба 3 савол ҷавоб диҳед.', stepName: 'Муқаддима' },
+            { type: 'slide', stepName: 'Муҳиммият', title: 'Чаро ин муҳим аст? 🧐', content: 'Бастабандӣ аввалин таассуроти меҳмон аст. Стикери тоза ва намуди тозаи зарф, намуди зебои хӯрок боварӣ ба ресторанро ба вуҷуд меорад. Ҳар як ҷузъиёт дар тайёр кардан ва ҷамъ кардан ба обрӯи ресторан таъсир мерасонад.', emoji: '' },
+            { type: 'slide', stepName: 'Дастур', title: '3 қоидаи оддӣ 📋', content: `<div class="infographic-list"><div class="infographic-item border-red"><span style="font-size:22px;">📦</span><div><b>Зарф:</b> Танҳо роллҳои ПК 34 ва ПК 34/8.</div></div><div class="infographic-item"><span style="font-size:22px;">📍</span><div><b>Ҷой:</b> Танҳо ба сарпӯш.</div></div><div class="infographic-item border-red"><span style="font-size:22px;">👈</span><div><b>Ҷойгиршавӣ:</b> Аз паҳлӯ, аз тарафи занҷабил/васаби.</div></div></div>`, emoji: '' },
+            { type: 'question', question: 'Барои кадом зарфҳо қоидаи "стикер ба сарпӯш аз паҳлӯ" ҷорӣ аст?', options: ['Роллҳои ПК 36', 'Роллҳои ПК 34 ва ПК 34/8', 'Роллҳои ПК 35'], correct: 1, success: '✅ Дуруст! Танҳо ПК 34 ва ПК 34/8 истифода мебарем.', fail: '❌ Стандарт: ПК 34 ва ПК 34/8.' },
+            { type: 'question', question: 'Стикерро ба кадом ҷои бастабандӣ часпондан лозим?', options: ['Ба паҳлӯи зарф ё ба поён', 'Ба сарпӯш, аз паҳлӯ, аз тарафи занҷабил/васаби', 'Ба маркази сарпӯш'], correct: 1, success: '✅ Аъло! Аз паҳлӯ, аз тарафи занҷабил/васаби мечаспонем.', fail: '❌ Ҷойи ягона: сарпӯш, аз паҳлӯ, аз тарафи занҷабил/васаби.' },
+            { type: 'slide', stepName: 'Хатогиҳо', title: 'Агар стикер вайрон шавад 🛠️', content: 'Баъзан стикер медарад. Дар чунин ҳолат онро <b>ҳеҷ гоҳ</b> боз начаспонед. Стикери вайроншуда партофта мешавад, стикери наву тамос гирифта мешавад. Намуди бастабандӣ бояд беайб бошад.', emoji: '' },
+            { type: 'question', question: 'Агар стикер тасодуфан вайрон шавад, чӣ бояд кард?', options: ['Ба ростӣ андохта, боз часпондан', 'Стикери нав ва тамос гирифтан', 'Ҳамин тавр мондан'], correct: 1, success: '✅ Дуруст! Танҳо стикери нав. Сифат аз ҳама болотар.', fail: '❌ Стикери нав мегирем. Стикерҳои вайроншударо часпондан мумкин нест.' },
+            { type: 'complete', stepName: 'Мустаҳкамкунӣ', title: '🎉 Шумо курсиро ба анҷом расонидед', content: 'Табрик! Шумо ҳамаи қоидаҳоро дарёфтед: зарфи дуруст, ҷои дақиқи стикер ва амалҳо ҳангоми хатогиҳо. Дақиқӣ дар меҳмон беҳтарин таассуротро ба вуҷуд меорад.', emoji: '' }
+        ],
+        kz: [
+            { type: 'welcome', title: 'Қаптама стандарты', content: 'Стикерді орналастырудың негізгі ережелерін зерттеңіз. Соңында 3 сұраққа жауап беріңіз.', stepName: 'Кіріспе' },
+            { type: 'slide', stepName: 'Маңыздылығы', title: 'Неліктен бұл маңызды? 🧐', content: 'Қаптама — бұл қонақтың алғашқы әсері. Ұқыпты стикер және контейнердің таза көрінісі, тағамның әдемі көрінісі мейрамханаға деген сенімді тудырады. Дайындау мен жинаудағы әрбір бөлшек мейрамхананың беделіне әсер етеді.', emoji: '' },
+            { type: 'slide', stepName: 'Нұсқау', title: '3 қарапайым ереже 📋', content: `<div class="infographic-list"><div class="infographic-item border-red"><span style="font-size:22px;">📦</span><div><b>Контейнер:</b> Тек ПК 34 және ПК 34/8 роллдары.</div></div><div class="infographic-item"><span style="font-size:22px;">📍</span><div><b>Орны:</b> Тек қақпаққа.</div></div><div class="infographic-item border-red"><span style="font-size:22px;">👈</span><div><b>Орналасуы:</b> Қатаң шетінен, имбирь/васаби жағынан.</div></div></div>`, emoji: '' },
+            { type: 'question', question: '"Стикер қақпақтың шетіне" ережесі қандай контейнерлерге қолданылады?', options: ['ПК 36 роллдары', 'ПК 34 және ПК 34/8 роллдары', 'ПК 35 роллдары'], correct: 1, success: '✅ Дұрыс! Тек ПК 34 және ПК 34/8 пайдаланамыз.', fail: '❌ Стандарт: ПК 34 және ПК 34/8.' },
+            { type: 'question', question: 'Стикерді қаптаманың қай жеріне жабыстыру керек?', options: ['Контейнердің шетіне немесе түбіне', 'Қақпаққа, шетінен, имбирь/васаби жағынан', 'Қақпақтың ортасына'], correct: 1, success: '✅ Керемет! Шетінен, имбирь/васаби жағынан жабыстырамыз.', fail: '❌ Бір ғана орын: қақпақ, шетінен, имбирь/васаби жағынан.' },
+            { type: 'slide', stepName: 'Қателер', title: 'Егер стикер бүлінсе 🛠️', content: 'Кейде стикер жыртылып қалуы мүмкін. Мұндай жағдайда оны <b>ешқашан</b> кері жабыстырмаңыз. Бүлінген стикер лақтырылады, жаңа, тұтас стикер алынады. Қаптаманың сыртқы түрі мінсіз болуы тиіс.', emoji: '' },
+            { type: 'question', question: 'Егер стикер кездейсоқ бүлінсе, не істеу керек?', options: ['Түзеп, кері жабыстыру', 'Жаңа тұтас стикер алу', 'Сол күйінде қалдыру'], correct: 1, success: '✅ Дұрыс! Тек жаңа стикер. Сапа бәрінен жоғары.', fail: '❌ Жаңа стикер аламыз. Бүлінген жапсырмаларды жабыстыруға болмайды.' },
+            { type: 'complete', stepName: 'Бекіту', title: '🎉 Сіз курсты аяқтадыңыз', content: 'Құттықтаймыз! Сіз барлық ережелерді білдіңіз: дұрыс контейнер, стикердің нақты орны және қателіктер кезіндегі әрекеттер. Ұқыптылық қонақта ең жақсы әсер қалдырады.', emoji: '' }
+        ]
+    };
+
+    // --- 2. Логика выбора языка ---
+    let currentLang = 'ru';
+    let gameSteps = gameStepsTranslations['ru'];
+
+    function setLanguage(lang) {
+        currentLang = lang;
+        gameSteps = gameStepsTranslations[lang];
+        const t = translations[lang];
+
+        // Обновляем статический HTML
+        document.getElementById('lbl_mainTitle').textContent = t.mainTitle;
+        document.getElementById('lbl_bannerText').textContent = t.bannerText;
+        document.getElementById('lbl_btnTrain').textContent = t.btnTrain;
+        document.getElementById('lbl_badgeStandard').textContent = t.badgeStandard;
+        document.getElementById('lbl_badgeRolls').textContent = t.badgeRolls;
+        document.getElementById('lbl_row1').textContent = t.row1;
+        document.getElementById('lbl_row2').textContent = t.row2;
+        document.getElementById('lbl_row3').textContent = t.row3;
+        document.getElementById('lbl_modalTitle').textContent = t.modalTitle;
+        document.getElementById('lbl_score').textContent = t.score;
+        
+        // Скрываем оверлей языка и показываем сайт
+        document.getElementById('langSelectionOverlay').style.display = 'none';
+        document.getElementById('mainContainer').style.display = 'block';
+    }
+
+    // --- 3. Логика Мини-курса ---
+    document.addEventListener('DOMContentLoaded', () => {
+        const modal = document.getElementById('gameModal');
+        const startBtn = document.getElementById('startGameBtn');
+        const gameBody = document.getElementById('gameBody');
+        const progressFill = document.getElementById('progressFill');
+        const scoreDisplay = document.getElementById('scoreDisplay');
+        const nextBtn = document.getElementById('nextBtn');
+        const closeBtn = document.getElementById('closeGameBtn');
+
+        let currentStep = 0;
+        let correctAnswers = 0;
+        let totalQuestions = 0;
+        let isLocked = false;
+
+        // Подсчет общего количества вопросов
+        function getTotalQuestions() {
+            let count = 0;
+            gameSteps.forEach(step => { if(step.type === 'question') count++; });
+            return count;
+        }
+        totalQuestions = getTotalQuestions();
+
+        function renderStep() {
+            const step = gameSteps[currentStep];
+            let html = '';
+            isLocked = false;
+
+            const progress = ((currentStep + 1) / gameSteps.length) * 100;
+            progressFill.style.width = Math.min(progress, 100) + '%';
+
+            if (step.type === 'welcome') {
+                html = `
+                    <div class="info-block" style="background: #f0f4f8; border-color: #d1d5db;">
+                        <div class="info-header">
+                            <div class="info-icon" style="background:#800000;"><i class="fa-solid fa-book-open"></i></div>
+                            <span class="step-tag" style="background:#800000; color:#fff;">${step.stepName}</span>
+                        </div>
+                        <h3 style="margin-bottom: 15px;">${step.title}</h3>
+                        <div class="info-text">${step.content}</div>
+                    </div>
+                `;
+                nextBtn.textContent = 'Начать обучение 🚀';
+                nextBtn.className = 'btn-next show';
+                closeBtn.className = 'btn-close-modal';
+            } 
+            else if (step.type === 'slide') {
+                html = `
+                    <div class="info-block">
+                        <div class="info-header">
+                            <div class="info-icon"><i class="fa-solid fa-file-lines"></i></div>
+                            <span class="step-tag">${step.stepName}</span>
+                        </div>
+                        <h3 style="margin-bottom: 15px;">${step.title}</h3>
+                        <div class="info-text">${step.content}</div>
+                    </div>
+                `;
+                nextBtn.textContent = 'Дальше ➡️';
+                nextBtn.className = 'btn-next show';
+                closeBtn.className = 'btn-close-modal';
+                nextBtn.onclick = () => { currentStep++; renderStep(); };
+            } 
+            else if (step.type === 'question') {
+                const iconOptions = ['1️⃣', '2️⃣', '3️⃣'];
+                let optionsHtml = step.options.map((opt, index) => 
+                    `<button class="option-btn" data-index="${index}"><span style="font-size:18px;">${iconOptions[index]}</span> ${opt}</button>`
+                ).join('');
+
+                html = `
+                    <div class="question-box">
+                        <h3>${step.question}</h3>
+                        <div class="options-grid" id="optionsContainer">${optionsHtml}</div>
+                        <div class="feedback-box" id="feedbackBox"></div>
+                    </div>
+                `;
+                nextBtn.className = 'btn-close-modal';
+                closeBtn.className = 'btn-close-modal';
+            } 
+            else if (step.type === 'complete') {
+                let finalScore = Math.round((correctAnswers / totalQuestions) * 100);
+                if(totalQuestions === 0) finalScore = 100;
+
+                html = `
+                    <div class="info-block" style="background: #e8f5e9; border-color: #c8e6c9;">
+                        <div class="info-header">
+                            <div class="info-icon" style="background:#28a745;"><i class="fa-solid fa-star"></i></div>
+                            <span class="step-tag" style="background:#28a745; color:#fff;">${step.stepName}</span>
+                        </div>
+                        <h3 style="margin-bottom: 15px;">${step.title}</h3>
+                        <div class="info-text">${step.content}</div>
+                        <div style="margin-top: 20px; background: #fff; padding: 15px; border-radius: 15px; text-align: center; border: 1px solid #c8e6c9;">
+                            <span style="font-size: 24px; font-weight: 700; color: #1e5f2a;">
+                                ${translations[currentLang].score.replace(':', '')} ${finalScore} из 100!
+                            </span>
+                        </div>
+                    </div>
+                `;
+                nextBtn.className = 'btn-close-modal';
+                closeBtn.textContent = translations[currentLang].completeBtn;
+                closeBtn.className = 'btn-close-modal show';
+            }
+
+            gameBody.innerHTML = html;
+            
+            let currentScore = 0;
+            if (totalQuestions > 0) currentScore = Math.round((correctAnswers / totalQuestions) * 100);
+            scoreDisplay.textContent = `${currentScore}`;
+
+            if (step.type === 'question') {
+                const options = document.querySelectorAll('.option-btn');
+                options.forEach(btn => { btn.addEventListener('click', handleAnswer); });
+            }
+
+            if(step.type === 'slide' || step.type === 'welcome') {
+                nextBtn.onclick = () => { currentStep++; renderStep(); };
+            }
+        }
+
+        function handleAnswer(e) {
+            if (isLocked) return;
+            isLocked = true;
+
+            const selectedBtn = e.currentTarget;
+            const selectedIndex = parseInt(selectedBtn.dataset.index);
+            const step = gameSteps[currentStep];
+            const feedbackBox = document.getElementById('feedbackBox');
+            const allOptions = document.querySelectorAll('.option-btn');
+
+            allOptions.forEach(btn => btn.disabled = true);
+
+            let isCorrect = (selectedIndex === step.correct);
+            
+            if(isCorrect) {
+                correctAnswers++;
+                selectedBtn.classList.add('correct');
+                feedbackBox.className = `feedback-box show success`;
+                feedbackBox.innerHTML = step.success;
+            } else {
+                selectedBtn.classList.add('wrong');
+                feedbackBox.className = `feedback-box show fail`;
+                feedbackBox.innerHTML = step.fail;
+                allOptions[step.correct].classList.add('correct');
+            }
+            
+            let currentScore = Math.round((correctAnswers / totalQuestions) * 100);
+            scoreDisplay.textContent = `${currentScore}`;
+
+            nextBtn.textContent = 'Дальше ➡️';
+            nextBtn.className = 'btn-next show';
+            nextBtn.onclick = () => { currentStep++; renderStep(); };
+        }
+
+        startBtn.addEventListener('click', () => {
+            modal.style.display = 'flex';
+            currentStep = 0; correctAnswers = 0;
+            renderStep();
+        });
+
+        closeBtn.addEventListener('click', () => { modal.style.display = 'none'; });
+        window.addEventListener('click', (e) => { if (e.target === modal) { modal.style.display = 'none'; } });
+    });
+</script>
+</body>
+</html>
