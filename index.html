@@ -269,6 +269,7 @@
                     <div class="badge-primary"><i class="fa-solid fa-star"></i> <span id="lbl_badgeStandard">СТАНДАРТ</span></div>
                     <div class="badge-secondary"><i class="fa-solid fa-cubes"></i> <span id="lbl_badgeRolls">Роллы</span></div>
                 </div>
+                <!-- Исправленный вывод через innerHTML -->
                 <div class="list-item"><span class="list-emoji">🍣</span><span id="lbl_row1">Для роллов (1 порция)</span></div>
                 <div class="list-item"><span class="list-emoji">🍱</span><span id="lbl_row2">в контейнерах <span class="highlight-red">ПК 34 и ПК 34/8</span></span></div>
                 <div class="list-item" style="flex-wrap: wrap;">
@@ -303,7 +304,7 @@
     </div>
 
 <script>
-    // --- 1. Объекты с переводами для статики и для курса ---
+    // --- 1. Объекты с переводами (исправлены row2 и row3 для вставки HTML) ---
     
     const translations = {
         ru: {
@@ -313,8 +314,8 @@
             badgeStandard: "СТАНДАРТ",
             badgeRolls: "Роллы",
             row1: "Для роллов (1 порция)",
-            row2: "в контейнерах ",
-            row3: "Стикер на крышку, ",
+            row2: 'в контейнерах <span class="highlight-red">ПК 34 и ПК 34/8</span>',
+            row3: 'Стикер на крышку, <strong class="bold-text">строго сбоку</strong> <span class="highlight-red">на стороне имбиря и васаби</span>',
             modalTitle: "📦 Инструкция по стандарту",
             score: "Очки:",
             nextBtn: "Продолжить →",
@@ -327,8 +328,8 @@
             badgeStandard: "СТАНДАРТ",
             badgeRolls: "Роллдор",
             row1: "Роллдор үчүн (1 порция)",
-            row2: "идиштеринде ",
-            row3: "Этикетканы капкакка, ",
+            row2: 'идиштеринде <span class="highlight-red">ПК 34 жана ПК 34/8</span>',
+            row3: 'Этикетканы капкакка, <strong class="bold-text">капталынан</strong> <span class="highlight-red">имбирь/васаби жактан</span>',
             modalTitle: "📦 Стандарт боюнча нускама",
             score: "Упайлар:",
             nextBtn: "Улантуу →",
@@ -341,8 +342,8 @@
             badgeStandard: "STANDART",
             badgeRolls: "Rollar",
             row1: "Rollar uchun (1 porsiya)",
-            row2: "konteynerlarda ",
-            row3: "Stiker qopqoqqa, ",
+            row2: 'konteynerlarda <span class="highlight-red">PK 34 va PK 34/8</span>',
+            row3: 'Stiker qopqoqqa, <strong class="bold-text">qat\'iy yon tomondan</strong> <span class="highlight-red">zanjabil/vasabi tomonidan</span>',
             modalTitle: "📦 Standart bo'yicha yo'riqnoma",
             score: "Ballar:",
             nextBtn: "Davom etish →",
@@ -355,8 +356,8 @@
             badgeStandard: "СТАНДАРТ",
             badgeRolls: "Роллҳо",
             row1: "Барои роллҳо (1 порсия)",
-            row2: "дар зарфҳои ",
-            row3: "Стикер ба сарпӯш, ",
+            row2: 'дар зарфҳои <span class="highlight-red">ПК 34 ва ПК 34/8</span>',
+            row3: 'Стикер ба сарпӯш, <strong class="bold-text">аз паҳлӯ</strong> <span class="highlight-red">аз тарафи занҷабил/васаби</span>',
             modalTitle: "📦 Дастури стандарт",
             score: "Холҳо:",
             nextBtn: "Идома →",
@@ -369,8 +370,8 @@
             badgeStandard: "СТАНДАРТ",
             badgeRolls: "Роллдар",
             row1: "Роллдар үшін (1 порция)",
-            row2: "контейнерлерде ",
-            row3: "Стикер қақпаққа, ",
+            row2: 'контейнерлерде <span class="highlight-red">ПК 34 және ПК 34/8</span>',
+            row3: 'Стикер қақпаққа, <strong class="bold-text">шетінен</strong> <span class="highlight-red">имбирь/васаби жағынан</span>',
             modalTitle: "📦 Стандарт бойынша нұсқаулық",
             score: "Ұпайлар:",
             nextBtn: "Жалғастыру →",
@@ -441,15 +442,18 @@
         gameSteps = gameStepsTranslations[lang];
         const t = translations[lang];
 
-        // Обновляем статический HTML
+        // Обновляем статический HTML (используем innerHTML для строк с цветами)
         document.getElementById('lbl_mainTitle').textContent = t.mainTitle;
         document.getElementById('lbl_bannerText').textContent = t.bannerText;
         document.getElementById('lbl_btnTrain').textContent = t.btnTrain;
         document.getElementById('lbl_badgeStandard').textContent = t.badgeStandard;
         document.getElementById('lbl_badgeRolls').textContent = t.badgeRolls;
         document.getElementById('lbl_row1').textContent = t.row1;
-        document.getElementById('lbl_row2').textContent = t.row2;
-        document.getElementById('lbl_row3').textContent = t.row3;
+        
+        // Здесь исправление: innerHTML для сохранения тегов <span> и <strong>
+        document.getElementById('lbl_row2').innerHTML = t.row2;
+        document.getElementById('lbl_row3').innerHTML = t.row3;
+        
         document.getElementById('lbl_modalTitle').textContent = t.modalTitle;
         document.getElementById('lbl_score').textContent = t.score;
         
