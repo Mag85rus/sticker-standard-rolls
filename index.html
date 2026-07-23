@@ -57,11 +57,12 @@
         .banner-text { display: flex; align-items: center; gap: 10px; font-weight: 600; color: #1a1a1a; }
         .banner-text i { color: #C74100; font-size: 18px; }
 
-        /* --- Кнопка --- */
+        /* --- Кнопка (Желтая точка) --- */
         .btn-wrapper {
             --width: 180px; --height: 48px; --padding: 6px;
             --border-radius: 24px; --dot-size: 8px;
-            --btn-color: #e4e4e4; --hue: 350deg; --animation-duration: 1.2s;
+            --btn-color: #e4e4e4; --hue: 55deg; /* Желтый */
+            --animation-duration: 1.2s;
 
             position: relative; display: flex; align-items: center; justify-content: center;
             width: var(--width); height: var(--height);
@@ -104,11 +105,21 @@
         .card-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 25px; padding-bottom: 20px; border-bottom: 1px solid #f5f5f5; }
         .badge-primary { background-color: #FF244C; color: #fff; padding: 8px 18px; border-radius: 30px; font-size: 13px; font-weight: 600; display: inline-flex; align-items: center; gap: 8px; }
         .badge-secondary { background-color: #F5F5DC; color: #C74100; padding: 8px 18px; border-radius: 30px; font-size: 13px; font-weight: 600; display: inline-flex; align-items: center; gap: 8px; }
-        .list-item { display: flex; align-items: center; padding: 14px 0; border-bottom: 1px solid #f5f5f5; gap: 15px; font-size: 15px; font-weight: 500; color: #1a1a1a; }
+        .list-item { display: flex; align-items: flex-start; padding: 14px 0; border-bottom: 1px solid #f5f5f5; gap: 15px; font-size: 15px; font-weight: 500; color: #1a1a1a; }
         .list-item:last-child { border-bottom: none; }
-        .list-emoji { font-size: 22px; width: 32px; text-align: center; }
+        .list-emoji { font-size: 22px; width: 32px; text-align: center; margin-top: 2px; }
         .highlight-red { color: #FF244C; font-weight: 600; }
         .bold-text { font-weight: 700; color: #1a1a1a; }
+
+        /* Инфографика для контейнеров */
+        .container-tags {
+            display: flex; flex-wrap: wrap; gap: 6px; margin-top: 6px;
+        }
+        .container-tag {
+            background: #fdf1e9; color: #c74100; font-weight: 600; font-size: 13px;
+            padding: 4px 12px; border-radius: 20px; border: 1px solid #f0e0d2;
+            letter-spacing: 0.3px; white-space: nowrap;
+        }
 
         .media-wrapper { flex: 1; min-width: 200px; max-width: 300px; display: flex; align-items: center; justify-content: center; }
         .media-wrapper img { width: 100%; aspect-ratio: 9 / 16; object-fit: cover; border-radius: 20px; box-shadow: 0 15px 40px rgba(255, 36, 76, 0.08), 0 4px 12px rgba(0, 0, 0, 0.05); background: #F5F5DC; }
@@ -129,7 +140,8 @@
         .info-icon { width: 45px; height: 45px; background: #C74100; color: #fff; border-radius: 50%; display: flex; justify-content: center; align-items: center; font-size: 22px; }
         .step-tag { background: #CCCCCC; color: #1a1a1a; font-size: 12px; font-weight: 700; padding: 4px 12px; border-radius: 20px; text-transform: uppercase; letter-spacing: 0.5px; }
         .info-text { font-size: 15px; line-height: 1.6; color: #333; }
-        .infographic-list { display: flex; flex-direction: column; gap: 12px; margin-top: 15px; }
+        
+        .infographic-list { display: flex; flex-direction: column; gap: 12px; margin-top: 10px; }
         .infographic-item { background: #ffffff; padding: 14px 18px; border-radius: 16px; border-left: 4px solid #C74100; display: flex; align-items: center; gap: 12px; box-shadow: 0 2px 6px rgba(0,0,0,0.02); }
         .infographic-item.border-red { border-left-color: #FF244C; }
         .infographic-item i { font-size: 20px; width: 28px; text-align: center; color: #1a1a1a; }
@@ -152,38 +164,14 @@
         .btn-close-modal { background: #CCCCCC; color: #1a1a1a; border: none; padding: 10px 30px; border-radius: 40px; font-weight: 600; cursor: pointer; display: none; }
         .btn-close-modal.show { display: inline-block; }
 
-        /* --- Экран выбора языка (с адаптивностью) --- */
-        .lang-select-overlay {
-            display: flex; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0, 0, 0, 0.6); backdrop-filter: blur(8px); z-index: 9999;
-            justify-content: center; align-items: center; padding: 20px;
-        }
-
-        .lang-select-container {
-            background: #ffffff; padding: 40px; border-radius: 40px; max-width: 550px; width: 100%;
-            box-shadow: 0 40px 80px rgba(0,0,0,0.3); text-align: center; position: relative; overflow: hidden;
-        }
-        .lang-select-container::before {
-            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 6px;
-            background: linear-gradient(90deg, #C74100 0%, #800000 100%);
-        }
+        /* --- Экран выбора языка --- */
+        .lang-select-overlay { display: flex; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.6); backdrop-filter: blur(8px); z-index: 9999; justify-content: center; align-items: center; padding: 20px; }
+        .lang-select-container { background: #ffffff; padding: 40px; border-radius: 40px; max-width: 550px; width: 100%; box-shadow: 0 40px 80px rgba(0,0,0,0.3); text-align: center; position: relative; overflow: hidden; }
+        .lang-select-container::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 6px; background: linear-gradient(90deg, #C74100 0%, #800000 100%); }
         .lang-select-title { font-family: 'Inter', sans-serif; font-size: 22px; font-weight: 700; color: #1a1a1a; margin-bottom: 8px; }
         .lang-select-sub { font-size: 14px; color: #666; margin-bottom: 25px; }
-
-        .lang-grid {
-            display: grid;
-            grid-template-columns: repeat(5, 1fr);
-            gap: 12px;
-            justify-content: center;
-        }
-
-        .lang-btn {
-            display: flex; align-items: center; justify-content: center; gap: 8px;
-            background: #F5F5DC; padding: 14px 16px; border-radius: 60px; border: 2px solid transparent;
-            font-family: 'Inter', sans-serif; font-size: 15px; font-weight: 600; color: #1a1a1a;
-            cursor: pointer; transition: all 0.2s ease; box-shadow: 0 2px 4px rgba(0,0,0,0.02);
-            text-align: center;
-        }
+        .lang-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; justify-content: center; }
+        .lang-btn { display: flex; align-items: center; justify-content: center; gap: 8px; background: #F5F5DC; padding: 14px 16px; border-radius: 60px; border: 2px solid transparent; font-family: 'Inter', sans-serif; font-size: 15px; font-weight: 600; color: #1a1a1a; cursor: pointer; transition: all 0.2s ease; box-shadow: 0 2px 4px rgba(0,0,0,0.02); text-align: center; }
         .lang-btn:hover { background: #eaead2; border-color: #C74100; transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
         .lang-btn:active { transform: scale(0.96); }
 
@@ -253,7 +241,7 @@
         <div class="training-banner">
             <div class="banner-text">
                 <i class="fa-solid fa-graduation-cap"></i> 
-                <span id="lbl_bannerText">Изучи стандарт упаковки</span>
+                <span id="lbl_bannerText">Изучи стандарт упаковки 👉 Нажми на кнопку</span>
             </div>
             <div class="btn-wrapper">
               <button class="btn" id="startGameBtn">
@@ -269,9 +257,11 @@
                     <div class="badge-primary"><i class="fa-solid fa-star"></i> <span id="lbl_badgeStandard">СТАНДАРТ</span></div>
                     <div class="badge-secondary"><i class="fa-solid fa-cubes"></i> <span id="lbl_badgeRolls">Роллы</span></div>
                 </div>
-                <!-- Исправленный вывод через innerHTML -->
                 <div class="list-item"><span class="list-emoji">🍣</span><span id="lbl_row1">Для роллов (1 порция)</span></div>
-                <div class="list-item"><span class="list-emoji">🍱</span><span id="lbl_row2">в контейнерах <span class="highlight-red">ПК 34 и ПК 34/8</span></span></div>
+                <div class="list-item">
+                    <span class="list-emoji">🍱</span>
+                    <span id="lbl_row2">в контейнерах <div class="container-tags"><span class="container-tag">ПК · 34</span><span class="container-tag">ПК · 34/8</span><span class="container-tag">ПК · 35</span><span class="container-tag">ПК · 36</span></div></span>
+                </div>
                 <div class="list-item" style="flex-wrap: wrap;">
                     <span class="list-emoji">🏷️</span>
                     <span id="lbl_row3">Стикер на крышку, <strong class="bold-text">строго сбоку</strong> <span class="highlight-red">на стороне имбиря и васаби</span></span>
@@ -283,7 +273,7 @@
         </div>
     </div>
 
-    <!-- Модальное окно (Мини-курс) -->
+    <!-- Модальное окно (Мини-курс с яркой инфографикой) -->
     <div class="modal-overlay" id="gameModal">
         <div class="modal-content">
             <div class="modal-header">
@@ -304,17 +294,17 @@
     </div>
 
 <script>
-    // --- 1. Объекты с переводами (исправлены row2 и row3 для вставки HTML) ---
+    // --- 1. Объекты с переводами (инфографика, меньше текста, исправленные вопросы) ---
     
     const translations = {
         ru: {
             mainTitle: "ТЕРМОСТИКЕР_ Роллы",
-            bannerText: "Изучи стандарт упаковки",
+            bannerText: "Изучи стандарт упаковки 👉 Нажми на кнопку",
             btnTrain: "Обучение",
             badgeStandard: "СТАНДАРТ",
             badgeRolls: "Роллы",
             row1: "Для роллов (1 порция)",
-            row2: 'в контейнерах <span class="highlight-red">ПК 34 и ПК 34/8</span>',
+            row2: 'в контейнерах <div class="container-tags"><span class="container-tag">ПК · 34</span><span class="container-tag">ПК · 34/8</span><span class="container-tag">ПК · 35</span><span class="container-tag">ПК · 36</span></div>',
             row3: 'Стикер на крышку, <strong class="bold-text">строго сбоку</strong> <span class="highlight-red">на стороне имбиря и васаби</span>',
             modalTitle: "📦 Инструкция по стандарту",
             score: "Очки:",
@@ -323,12 +313,12 @@
         },
         ky: {
             mainTitle: "ТЕРМОСТИКЕР_ Роллдор",
-            bannerText: "Таңгактоо стандартын үйрөнүңүз",
+            bannerText: "Таңгактоо стандартын үйрөнүңүз 👉 Баскычты басыңыз",
             btnTrain: "Окутуу",
             badgeStandard: "СТАНДАРТ",
             badgeRolls: "Роллдор",
             row1: "Роллдор үчүн (1 порция)",
-            row2: 'идиштеринде <span class="highlight-red">ПК 34 жана ПК 34/8</span>',
+            row2: 'идиштеринде <div class="container-tags"><span class="container-tag">ПК · 34</span><span class="container-tag">ПК · 34/8</span><span class="container-tag">ПК · 35</span><span class="container-tag">ПК · 36</span></div>',
             row3: 'Этикетканы капкакка, <strong class="bold-text">капталынан</strong> <span class="highlight-red">имбирь/васаби жактан</span>',
             modalTitle: "📦 Стандарт боюнча нускама",
             score: "Упайлар:",
@@ -337,12 +327,12 @@
         },
         uz: {
             mainTitle: "ТЕРМОСТИКЕР_ Rollar",
-            bannerText: "Qadoqlash standartini o'rganing",
+            bannerText: "Qadoqlash standartini o'rganing 👉 Tugmani bosing",
             btnTrain: "Trening",
             badgeStandard: "STANDART",
             badgeRolls: "Rollar",
             row1: "Rollar uchun (1 porsiya)",
-            row2: 'konteynerlarda <span class="highlight-red">PK 34 va PK 34/8</span>',
+            row2: 'konteynerlarda <div class="container-tags"><span class="container-tag">ПК · 34</span><span class="container-tag">ПК · 34/8</span><span class="container-tag">ПК · 35</span><span class="container-tag">ПК · 36</span></div>',
             row3: 'Stiker qopqoqqa, <strong class="bold-text">qat\'iy yon tomondan</strong> <span class="highlight-red">zanjabil/vasabi tomonidan</span>',
             modalTitle: "📦 Standart bo'yicha yo'riqnoma",
             score: "Ballar:",
@@ -351,12 +341,12 @@
         },
         tj: {
             mainTitle: "ТЕРМОСТИКЕР_ Роллҳо",
-            bannerText: "Стандарти бастабандиро омӯзед",
+            bannerText: "Стандарти бастабандиро омӯзед 👉 Тугмаро пахш кунед",
             btnTrain: "Омӯзиш",
             badgeStandard: "СТАНДАРТ",
             badgeRolls: "Роллҳо",
             row1: "Барои роллҳо (1 порсия)",
-            row2: 'дар зарфҳои <span class="highlight-red">ПК 34 ва ПК 34/8</span>',
+            row2: 'дар зарфҳои <div class="container-tags"><span class="container-tag">ПК · 34</span><span class="container-tag">ПК · 34/8</span><span class="container-tag">ПК · 35</span><span class="container-tag">ПК · 36</span></div>',
             row3: 'Стикер ба сарпӯш, <strong class="bold-text">аз паҳлӯ</strong> <span class="highlight-red">аз тарафи занҷабил/васаби</span>',
             modalTitle: "📦 Дастури стандарт",
             score: "Холҳо:",
@@ -365,12 +355,12 @@
         },
         kz: {
             mainTitle: "ТЕРМОСТИКЕР_ Роллдар",
-            bannerText: "Қаптама стандартын зерттеңіз",
+            bannerText: "Қаптама стандартын зерттеңіз 👉 Батырманы басыңыз",
             btnTrain: "Оқыту",
             badgeStandard: "СТАНДАРТ",
             badgeRolls: "Роллдар",
             row1: "Роллдар үшін (1 порция)",
-            row2: 'контейнерлерде <span class="highlight-red">ПК 34 және ПК 34/8</span>',
+            row2: 'контейнерлерде <div class="container-tags"><span class="container-tag">ПК · 34</span><span class="container-tag">ПК · 34/8</span><span class="container-tag">ПК · 35</span><span class="container-tag">ПК · 36</span></div>',
             row3: 'Стикер қақпаққа, <strong class="bold-text">шетінен</strong> <span class="highlight-red">имбирь/васаби жағынан</span>',
             modalTitle: "📦 Стандарт бойынша нұсқаулық",
             score: "Ұпайлар:",
@@ -379,55 +369,77 @@
         }
     };
 
-    // Массивы для обучения
+    // Массивы для обучения (Красочная инфографика, короткие тексты, все 4 контейнера в вопросе)
     const gameStepsTranslations = {
         ru: [
             { type: 'welcome', title: 'Стандарт упаковки', content: 'Изучите главные правила размещения стикера. В конце ответьте на 3 вопроса.', stepName: 'Введение' },
-            { type: 'slide', stepName: 'Важность', title: 'Почему это важно? 🧐', content: 'Упаковка — это первое впечатление гостя. Аккуратная наклейка и чистый вид контейнера, красивый вид блюда создают доверие к ресторану. Каждая деталь в приготовлении и сборке влияет на репутацию ресторана.', emoji: '' },
-            { type: 'slide', stepName: 'Инструкция', title: '3 простых правила 📋', content: `<div class="infographic-list"><div class="infographic-item border-red"><span style="font-size:22px;">📦</span><div><b>Контейнер:</b> Только роллы в ПК 34 и ПК 34/8.</div></div><div class="infographic-item"><span style="font-size:22px;">📍</span><div><b>Место:</b> Исключительно на крышку.</div></div><div class="infographic-item border-red"><span style="font-size:22px;">👈</span><div><b>Расположение:</b> Строго сбоку, со стороны имбиря/васаби.</div></div></div>`, emoji: '' },
-            { type: 'question', question: 'Для каких контейнеров действует правило "стикер на крышку сбоку"?', options: ['Роллы ПК 36', 'Роллы ПК 34 и ПК 34/8', 'Роллы ПК 35'], correct: 1, success: '✅ Верно! Используем только ПК 34 и ПК 34/8.', fail: '❌ Ошибка. Стандарт: ПК 34 и ПК 34/8.' },
+            
+            { type: 'slide', stepName: 'Важность', title: 'Почему это важно? 🧐', content: `
+                <div class="infographic-list">
+                    <div class="infographic-item"><span style="font-size:22px;">👀</span><div><b>Первое впечатление</b> гостя</div></div>
+                    <div class="infographic-item"><span style="font-size:22px;">🤝</span><div><b>Доверие</b> к ресторану</div></div>
+                    <div class="infographic-item"><span style="font-size:22px;">⭐</span><div><b>Репутация</b> ресторана</div></div>
+                </div>`, emoji: '' },
+            
+            { type: 'slide', stepName: 'Инструкция', title: '3 простых правила 📋', content: `
+                <div class="infographic-list">
+                    <div class="infographic-item border-red"><span style="font-size:22px;">📦</span><div><b>Контейнер:</b> Роллы в <br><span class="container-tag">ПК · 34</span><span class="container-tag">ПК · 34/8</span><span class="container-tag">ПК · 35</span><span class="container-tag">ПК · 36</span></div></div>
+                    <div class="infographic-item"><span style="font-size:22px;">📍</span><div><b>Место:</b> Исключительно на крышку</div></div>
+                    <div class="infographic-item border-red"><span style="font-size:22px;">👈</span><div><b>Расположение:</b> Строго сбоку, со стороны имбиря/васаби</div></div>
+                </div>`, emoji: '' },
+
+            { type: 'question', question: 'Для каких контейнеров действует правило "стикер на крышку сбоку"?', options: ['Роллы ПК · 35 и ПК · 36', 'Роллы ПК · 34, ПК · 34/8, ПК · 35, ПК · 36', 'Только ПК · 34'], correct: 1, success: '✅ Верно! Правило действует для всех четырех: ПК · 34, 34/8, 35 и 36.', fail: '❌ Ошибка. Стандарт распространяется на ПК · 34, 34/8, 35 и 36.' },
+            
             { type: 'question', question: 'Куда именно на упаковке нужно клеить стикер?', options: ['Сбоку или на дно контейнера', 'На крышку, строго сбоку, со стороны имбиря/васаби', 'По центру крышки'], correct: 1, success: '✅ Идеально! Клеим строго сбоку, со стороны имбиря/васаби.', fail: '❌ Место одно: крышка, строго сбоку, со стороны имбиря/васаби.' },
-            { type: 'slide', stepName: 'Ошибки', title: 'Если стикер испорчен 🛠️', content: 'Иногда наклейка может порваться. В такой ситуации <b>никогда не клеим её обратно</b>. Испорченный стикер выбрасывается, берется новый, целый. Внешний вид упаковки должен быть безупречным.', emoji: '' },
+            
+            { type: 'slide', stepName: 'Ошибки', title: 'Если стикер испорчен 🛠️', content: `
+                <div class="infographic-list">
+                    <div class="infographic-item border-red"><span style="font-size:22px;">🚫</span><div><b>Не клеим</b> испорченный стикер обратно</div></div>
+                    <div class="infographic-item"><span style="font-size:22px;">✅</span><div>Берем <b>новый, целый</b> стикер</div></div>
+                    <div class="infographic-item"><span style="font-size:22px;">✨</span><div>Упаковка должна быть <b>безупречной</b></div></div>
+                </div>`, emoji: '' },
+
             { type: 'question', question: 'Что делать, если стикер случайно испортился?', options: ['Расправить и приклеить обратно', 'Взять новый целый стикер', 'Оставить как есть'], correct: 1, success: '✅ Верно! Только новый стикер. Качество превыше всего.', fail: '❌ Берем новый стикер. Испорченные наклейки клеить нельзя.' },
+            
             { type: 'complete', stepName: 'Закрепление', title: '🎉 Вы завершили курс', content: 'Поздравляем! Вы прошли инструкцию и теперь знаете все правила: правильный контейнер, точное место наклейки и действия при ошибках. Аккуратность создает лучшее впечатление у гостя.', emoji: '' }
         ],
         ky: [
             { type: 'welcome', title: 'Таңгактоо стандарты', content: 'Стикерди жайгаштыруунун негизги эрежелерин үйрөнүңүз. Аягында 3 суроого жооп бериңиз.', stepName: 'Киришүү' },
-            { type: 'slide', stepName: 'Маанилүүлүгү', title: 'Эмне үчүн бул маанилүү? 🧐', content: 'Таңгактоо — бул коноктун биринчи таасири. Таза стикер жана контейнердин таза көрүнүшү, тамактын кооз көрүнүшү ресторанга ишенимди жаратат. Ар бир даярдоо жана чогултуудагы деталь ресторандын репутациясына таасир этет.', emoji: '' },
-            { type: 'slide', stepName: 'Көрсөтмө', title: '3 жөнөкөй эреже 📋', content: `<div class="infographic-list"><div class="infographic-item border-red"><span style="font-size:22px;">📦</span><div><b>Контейнер:</b> Роллдор ПК 34 жана ПК 34/8 гана.</div></div><div class="infographic-item"><span style="font-size:22px;">📍</span><div><b>Орун:</b> Капкакка гана.</div></div><div class="infographic-item border-red"><span style="font-size:22px;">👈</span><div><b>Жайгашуусу:</b> Капталынан, имбирь/васаби жактан.</div></div></div>`, emoji: '' },
-            { type: 'question', question: '"Стикер капкактын капталына" эрежеси кайсы контейнерлерде колдонулат?', options: ['Роллдор ПК 36', 'Роллдор ПК 34 жана ПК 34/8', 'Роллдор ПК 35'], correct: 1, success: '✅ Туура! ПК 34 жана ПК 34/8 гана колдонобуз.', fail: '❌ Стандарт: ПК 34 жана ПК 34/8.' },
+            { type: 'slide', stepName: 'Маанилүүлүгү', title: 'Эмне үчүн бул маанилүү? 🧐', content: `<div class="infographic-list"><div class="infographic-item"><span style="font-size:22px;">👀</span><div><b>Коноктун биринчи</b> таасири</div></div><div class="infographic-item"><span style="font-size:22px;">🤝</span><div><b>Ишеним</b> ресторанга</div></div><div class="infographic-item"><span style="font-size:22px;">⭐</span><div><b>Репутация</b> ресторандын</div></div></div>`, emoji: '' },
+            { type: 'slide', stepName: 'Көрсөтмө', title: '3 жөнөкөй эреже 📋', content: `<div class="infographic-list"><div class="infographic-item border-red"><span style="font-size:22px;">📦</span><div><b>Контейнер:</b> Роллдор <br><span class="container-tag">ПК · 34</span><span class="container-tag">ПК · 34/8</span><span class="container-tag">ПК · 35</span><span class="container-tag">ПК · 36</span></div></div><div class="infographic-item"><span style="font-size:22px;">📍</span><div><b>Орун:</b> Капкакка гана</div></div><div class="infographic-item border-red"><span style="font-size:22px;">👈</span><div><b>Жайгашуусу:</b> Капталынан, имбирь/васаби жактан</div></div></div>`, emoji: '' },
+            { type: 'question', question: '"Стикер капкактын капталына" эрежеси кайсы контейнерлерде колдонулат?', options: ['Роллдор ПК · 35 жана ПК · 36', 'Роллдор ПК · 34, ПК · 34/8, ПК · 35, ПК · 36', 'Только ПК · 34'], correct: 1, success: '✅ Туура! Эреже бардык төртөө үчүн: ПК · 34, 34/8, 35 жана 36.', fail: '❌ Стандарт ПК · 34, 34/8, 35 жана 36 үчүн колдонулат.' },
             { type: 'question', question: 'Стикер таңгактын кайсы жерине чапталышы керек?', options: ['Контейнердин капталына же түбүнө', 'Капкакка, капталынан, имбирь/васаби жактан', 'Капкактын ортосуна'], correct: 1, success: '✅ Мыкты! Капталынан, имбирь/васаби жактан чаптайбыз.', fail: '❌ Орду: капкак, капталынан, имбирь/васаби жактан.' },
-            { type: 'slide', stepName: 'Каталар', title: 'Эгерде стикер бузулса 🛠️', content: 'Кээде стикер жыртылып калышы мүмкүн. Мындай учурда аны <b>эч качан</b> кайра чаптабайбыз. Бузулган стикер ыргытылып, жаңы, бүтүн стикер алынат. Таңгактын көрүнүшү кемчиликсиз болушу керек.', emoji: '' },
+            { type: 'slide', stepName: 'Каталар', title: 'Эгерде стикер бузулса 🛠️', content: `<div class="infographic-list"><div class="infographic-item border-red"><span style="font-size:22px;">🚫</span><div><b>Каптабайбыз</b> бузулган стикерди</div></div><div class="infographic-item"><span style="font-size:22px;">✅</span><div><b>Жаңы, бүтүн</b> стикер алабыз</div></div><div class="infographic-item"><span style="font-size:22px;">✨</span><div>Таңгак <b>кемчиликсиз</b> болууга тийиш</div></div></div>`, emoji: '' },
             { type: 'question', question: 'Эгерде стикер кокусунан бузулса, эмне кылуу керек?', options: ['Түздөп, кайра чаптоо', 'Жаңы бүтүн стикер алуу', 'Калтыруу ошол бойдон'], correct: 1, success: '✅ Туура! Жаңы стикер гана. Сапат баарынан жогору.', fail: '❌ Жаңы стикер алабыз. Бузулгандарды чаптоого болбойт.' },
             { type: 'complete', stepName: 'Бекемдөө', title: '🎉 Сиз курсту аяктадыңыз', content: 'Куттуктайбыз! Сиз бардык эрежелерди үйрөндүңүз: туура контейнер, стикердин так орду жана каталардагы аракеттер. Тактык конокто эң сонун таасир калтырат.', emoji: '' }
         ],
         uz: [
             { type: 'welcome', title: 'Qadoqlash standarti', content: 'Stikerni joylashtirishning asosiy qoidalarini o‘rganing. Oxirida 3 ta savolga javob bering.', stepName: 'Kirish' },
-            { type: 'slide', stepName: 'Muhimligi', title: 'Nima uchun bu muhim? 🧐', content: 'Qadoqlash mehmonning birinchi taassurotidir. Chiroyli stiker, konteynerning toza ko\'rinishi va ovqatning chiroyli ko\'rinishi restoranga ishonch uyg\'otadi. Tayyorlash va yig\'ishdagi har bir tafsilot restoranning obro\'siga ta\'sir qiladi.', emoji: '' },
-            { type: 'slide', stepName: 'Yo‘riqnoma', title: '3 ta oddiy qoida 📋', content: `<div class="infographic-list"><div class="infographic-item border-red"><span style="font-size:22px;">📦</span><div><b>Konteyner:</b> Faqat PK 34 va PK 34/8 rollari.</div></div><div class="infographic-item"><span style="font-size:22px;">📍</span><div><b>Joy:</b> Faqat qopqoqda.</div></div><div class="infographic-item border-red"><span style="font-size:22px;">👈</span><div><b>Joylashuv:</b> Qat\'iy yon tomonda, zanjabil/vasabi tomonida.</div></div></div>`, emoji: '' },
-            { type: 'question', question: '"Stiker qopqoqning yon tomoniga" qoidasi qaysi konteynerlar uchun amal qiladi?', options: ['PK 36 rollari', 'PK 34 va PK 34/8 rollari', 'PK 35 rollari'], correct: 1, success: '✅ To‘g‘ri! Faqat PK 34 va PK 34/8 dan foydalanamiz.', fail: '❌ Standart: PK 34 va PK 34/8.' },
+            { type: 'slide', stepName: 'Muhimligi', title: 'Nima uchun bu muhim? 🧐', content: `<div class="infographic-list"><div class="infographic-item"><span style="font-size:22px;">👀</span><div><b>Birinchi taassurot</b> mehmon</div></div><div class="infographic-item"><span style="font-size:22px;">🤝</span><div><b>Ishonch</b> restoranga</div></div><div class="infographic-item"><span style="font-size:22px;">⭐</span><div><b>Obro‘</b> restoranning</div></div></div>`, emoji: '' },
+            { type: 'slide', stepName: 'Yo‘riqnoma', title: '3 ta oddiy qoida 📋', content: `<div class="infographic-list"><div class="infographic-item border-red"><span style="font-size:22px;">📦</span><div><b>Konteyner:</b> Rollar <br><span class="container-tag">ПК · 34</span><span class="container-tag">ПК · 34/8</span><span class="container-tag">ПК · 35</span><span class="container-tag">ПК · 36</span></div></div><div class="infographic-item"><span style="font-size:22px;">📍</span><div><b>Joy:</b> Faqat qopqoqda</div></div><div class="infographic-item border-red"><span style="font-size:22px;">👈</span><div><b>Joylashuv:</b> Yon tomonda, zanjabil/vasabi tomonida</div></div></div>`, emoji: '' },
+            { type: 'question', question: '"Stiker qopqoqning yon tomoniga" qoidasi qaysi konteynerlar uchun amal qiladi?', options: ['PK · 35 va PK · 36 rollari', 'PK · 34, PK · 34/8, PK · 35, PK · 36 rollari', 'Faqat PK · 34'], correct: 1, success: '✅ To‘g‘ri! Qoida barcha to‘rtlari uchun: PK · 34, 34/8, 35 va 36.', fail: '❌ Standart PK · 34, 34/8, 35 va 36 uchun qo‘llaniladi.' },
             { type: 'question', question: 'Stiker qadoqning qayeriga yopishtirilishi kerak?', options: ['Konteynerning yoniga yoki tubiga', 'Qopqoqning yon tomoniga, zanjabil/vasabi tomonidan', 'Qopqoqning o‘rtasiga'], correct: 1, success: '✅ Ajoyib! Yon tomondan, zanjabil/vasabi tomoniga yopishtiramiz.', fail: '❌ Bitta joy: qopqoqning yon tomoni, zanjabil/vasabi tomoni.' },
-            { type: 'slide', stepName: 'Xatolar', title: 'Agar stiker buzilsa 🛠️', content: 'Ba’zida stiker yirtilib ketishi mumkin. Bunday holatda uni <b>hech qachon</b> qayta yopishtirmang. Buzilgan stiker tashlanadi va yangi, butun stiker olinadi. Qadoqning tashqi ko‘rinishi mukammal bo‘lishi kerak.', emoji: '' },
+            { type: 'slide', stepName: 'Xatolar', title: 'Agar stiker buzilsa 🛠️', content: `<div class="infographic-list"><div class="infographic-item border-red"><span style="font-size:22px;">🚫</span><div><b>Yopishtirmang</b> buzilgan stikerni</div></div><div class="infographic-item"><span style="font-size:22px;">✅</span><div><b>Yangi, butun</b> stiker oling</div></div><div class="infographic-item"><span style="font-size:22px;">✨</span><div>Qadoq <b>mukammal</b> bo‘lishi kerak</div></div></div>`, emoji: '' },
             { type: 'question', question: 'Agar stiker tasodifan buzilsa, nima qilish kerak?', options: ['Tekislab, qayta yopishtirish', 'Yangi butun stiker olish', 'Shunday qoldirish'], correct: 1, success: '✅ To‘g‘ri! Faqat yangi stiker. Sifat hamma narsadan muhim.', fail: '❌ Yangi stiker olamiz. Buzilgan stikerlarni yopishtirib bo‘lmaydi.' },
             { type: 'complete', stepName: 'Mustahkamlash', title: '🎉 Siz kursni tugatdingiz', content: 'Tabriklaymiz! Siz barcha qoidalarni o‘rgandingiz: to‘g‘ri konteyner, stikerning aniq joyi va xatolardagi harakatlar. Aniqlik mehmonda eng yaxshi taassurot qoldiradi.', emoji: '' }
         ],
         tj: [
             { type: 'welcome', title: 'Стандарти бастабандӣ', content: 'Қоидаҳои асосии ҷойгиркунии стикерро омӯзед. Дар охир ба 3 савол ҷавоб диҳед.', stepName: 'Муқаддима' },
-            { type: 'slide', stepName: 'Муҳиммият', title: 'Чаро ин муҳим аст? 🧐', content: 'Бастабандӣ аввалин таассуроти меҳмон аст. Стикери тоза ва намуди тозаи зарф, намуди зебои хӯрок боварӣ ба ресторанро ба вуҷуд меорад. Ҳар як ҷузъиёт дар тайёр кардан ва ҷамъ кардан ба обрӯи ресторан таъсир мерасонад.', emoji: '' },
-            { type: 'slide', stepName: 'Дастур', title: '3 қоидаи оддӣ 📋', content: `<div class="infographic-list"><div class="infographic-item border-red"><span style="font-size:22px;">📦</span><div><b>Зарф:</b> Танҳо роллҳои ПК 34 ва ПК 34/8.</div></div><div class="infographic-item"><span style="font-size:22px;">📍</span><div><b>Ҷой:</b> Танҳо ба сарпӯш.</div></div><div class="infographic-item border-red"><span style="font-size:22px;">👈</span><div><b>Ҷойгиршавӣ:</b> Аз паҳлӯ, аз тарафи занҷабил/васаби.</div></div></div>`, emoji: '' },
-            { type: 'question', question: 'Барои кадом зарфҳо қоидаи "стикер ба сарпӯш аз паҳлӯ" ҷорӣ аст?', options: ['Роллҳои ПК 36', 'Роллҳои ПК 34 ва ПК 34/8', 'Роллҳои ПК 35'], correct: 1, success: '✅ Дуруст! Танҳо ПК 34 ва ПК 34/8 истифода мебарем.', fail: '❌ Стандарт: ПК 34 ва ПК 34/8.' },
+            { type: 'slide', stepName: 'Муҳиммият', title: 'Чаро ин муҳим аст? 🧐', content: `<div class="infographic-list"><div class="infographic-item"><span style="font-size:22px;">👀</span><div><b>Таассуроти аввалин</b> меҳмон</div></div><div class="infographic-item"><span style="font-size:22px;">🤝</span><div><b>Боварӣ</b> ба ресторан</div></div><div class="infographic-item"><span style="font-size:22px;">⭐</span><div><b>Обрӯ</b> ресторан</div></div></div>`, emoji: '' },
+            { type: 'slide', stepName: 'Дастур', title: '3 қоидаи оддӣ 📋', content: `<div class="infographic-list"><div class="infographic-item border-red"><span style="font-size:22px;">📦</span><div><b>Зарф:</b> Роллҳои <br><span class="container-tag">ПК · 34</span><span class="container-tag">ПК · 34/8</span><span class="container-tag">ПК · 35</span><span class="container-tag">ПК · 36</span></div></div><div class="infographic-item"><span style="font-size:22px;">📍</span><div><b>Ҷой:</b> Танҳо ба сарпӯш</div></div><div class="infographic-item border-red"><span style="font-size:22px;">👈</span><div><b>Ҷойгиршавӣ:</b> Аз паҳлӯ, аз тарафи занҷабил/васаби</div></div></div>`, emoji: '' },
+            { type: 'question', question: 'Барои кадом зарфҳо қоидаи "стикер ба сарпӯш аз паҳлӯ" ҷорӣ аст?', options: ['Роллҳои ПК · 35 ва ПК · 36', 'Роллҳои ПК · 34, ПК · 34/8, ПК · 35, ПК · 36', 'Танҳо ПК · 34'], correct: 1, success: '✅ Дуруст! Қоида барои ҳама чор: ПК · 34, 34/8, 35 ва 36.', fail: '❌ Стандарт ПК · 34, 34/8, 35 ва 36 татбиқ мешавад.' },
             { type: 'question', question: 'Стикерро ба кадом ҷои бастабандӣ часпондан лозим?', options: ['Ба паҳлӯи зарф ё ба поён', 'Ба сарпӯш, аз паҳлӯ, аз тарафи занҷабил/васаби', 'Ба маркази сарпӯш'], correct: 1, success: '✅ Аъло! Аз паҳлӯ, аз тарафи занҷабил/васаби мечаспонем.', fail: '❌ Ҷойи ягона: сарпӯш, аз паҳлӯ, аз тарафи занҷабил/васаби.' },
-            { type: 'slide', stepName: 'Хатогиҳо', title: 'Агар стикер вайрон шавад 🛠️', content: 'Баъзан стикер медарад. Дар чунин ҳолат онро <b>ҳеҷ гоҳ</b> боз начаспонед. Стикери вайроншуда партофта мешавад, стикери наву тамос гирифта мешавад. Намуди бастабандӣ бояд беайб бошад.', emoji: '' },
+            { type: 'slide', stepName: 'Хатогиҳо', title: 'Агар стикер вайрон шавад 🛠️', content: `<div class="infographic-list"><div class="infographic-item border-red"><span style="font-size:22px;">🚫</span><div><b>Начаспонед</b> стикери вайроншударо</div></div><div class="infographic-item"><span style="font-size:22px;">✅</span><div><b>Стикери нав, тамос</b> гиред</div></div><div class="infographic-item"><span style="font-size:22px;">✨</span><div>Бастабандӣ <b>беайб</b> бошад</div></div></div>`, emoji: '' },
             { type: 'question', question: 'Агар стикер тасодуфан вайрон шавад, чӣ бояд кард?', options: ['Ба ростӣ андохта, боз часпондан', 'Стикери нав ва тамос гирифтан', 'Ҳамин тавр мондан'], correct: 1, success: '✅ Дуруст! Танҳо стикери нав. Сифат аз ҳама болотар.', fail: '❌ Стикери нав мегирем. Стикерҳои вайроншударо часпондан мумкин нест.' },
             { type: 'complete', stepName: 'Мустаҳкамкунӣ', title: '🎉 Шумо курсиро ба анҷом расонидед', content: 'Табрик! Шумо ҳамаи қоидаҳоро дарёфтед: зарфи дуруст, ҷои дақиқи стикер ва амалҳо ҳангоми хатогиҳо. Дақиқӣ дар меҳмон беҳтарин таассуротро ба вуҷуд меорад.', emoji: '' }
         ],
         kz: [
             { type: 'welcome', title: 'Қаптама стандарты', content: 'Стикерді орналастырудың негізгі ережелерін зерттеңіз. Соңында 3 сұраққа жауап беріңіз.', stepName: 'Кіріспе' },
-            { type: 'slide', stepName: 'Маңыздылығы', title: 'Неліктен бұл маңызды? 🧐', content: 'Қаптама — бұл қонақтың алғашқы әсері. Ұқыпты стикер және контейнердің таза көрінісі, тағамның әдемі көрінісі мейрамханаға деген сенімді тудырады. Дайындау мен жинаудағы әрбір бөлшек мейрамхананың беделіне әсер етеді.', emoji: '' },
-            { type: 'slide', stepName: 'Нұсқау', title: '3 қарапайым ереже 📋', content: `<div class="infographic-list"><div class="infographic-item border-red"><span style="font-size:22px;">📦</span><div><b>Контейнер:</b> Тек ПК 34 және ПК 34/8 роллдары.</div></div><div class="infographic-item"><span style="font-size:22px;">📍</span><div><b>Орны:</b> Тек қақпаққа.</div></div><div class="infographic-item border-red"><span style="font-size:22px;">👈</span><div><b>Орналасуы:</b> Қатаң шетінен, имбирь/васаби жағынан.</div></div></div>`, emoji: '' },
-            { type: 'question', question: '"Стикер қақпақтың шетіне" ережесі қандай контейнерлерге қолданылады?', options: ['ПК 36 роллдары', 'ПК 34 және ПК 34/8 роллдары', 'ПК 35 роллдары'], correct: 1, success: '✅ Дұрыс! Тек ПК 34 және ПК 34/8 пайдаланамыз.', fail: '❌ Стандарт: ПК 34 және ПК 34/8.' },
+            { type: 'slide', stepName: 'Маңыздылығы', title: 'Неліктен бұл маңызды? 🧐', content: `<div class="infographic-list"><div class="infographic-item"><span style="font-size:22px;">👀</span><div><b>Алғашқы әсер</b> қонақ</div></div><div class="infographic-item"><span style="font-size:22px;">🤝</span><div><b>Сенім</b> мейрамханаға</div></div><div class="infographic-item"><span style="font-size:22px;">⭐</span><div><b>Бедел</b> мейрамхананың</div></div></div>`, emoji: '' },
+            { type: 'slide', stepName: 'Нұсқау', title: '3 қарапайым ереже 📋', content: `<div class="infographic-list"><div class="infographic-item border-red"><span style="font-size:22px;">📦</span><div><b>Контейнер:</b> Роллдар <br><span class="container-tag">ПК · 34</span><span class="container-tag">ПК · 34/8</span><span class="container-tag">ПК · 35</span><span class="container-tag">ПК · 36</span></div></div><div class="infographic-item"><span style="font-size:22px;">📍</span><div><b>Орны:</b> Тек қақпаққа</div></div><div class="infographic-item border-red"><span style="font-size:22px;">👈</span><div><b>Орналасуы:</b> Шетінен, имбирь/васаби жағынан</div></div></div>`, emoji: '' },
+            { type: 'question', question: '"Стикер қақпақтың шетіне" ережесі қандай контейнерлерге қолданылады?', options: ['ПК · 35 және ПК · 36 роллдары', 'ПК · 34, ПК · 34/8, ПК · 35, ПК · 36 роллдары', 'Тек ПК · 34'], correct: 1, success: '✅ Дұрыс! Ереже барлық төртеуіне: ПК · 34, 34/8, 35 және 36.', fail: '❌ Стандарт ПК · 34, 34/8, 35 және 36 қолданылады.' },
             { type: 'question', question: 'Стикерді қаптаманың қай жеріне жабыстыру керек?', options: ['Контейнердің шетіне немесе түбіне', 'Қақпаққа, шетінен, имбирь/васаби жағынан', 'Қақпақтың ортасына'], correct: 1, success: '✅ Керемет! Шетінен, имбирь/васаби жағынан жабыстырамыз.', fail: '❌ Бір ғана орын: қақпақ, шетінен, имбирь/васаби жағынан.' },
-            { type: 'slide', stepName: 'Қателер', title: 'Егер стикер бүлінсе 🛠️', content: 'Кейде стикер жыртылып қалуы мүмкін. Мұндай жағдайда оны <b>ешқашан</b> кері жабыстырмаңыз. Бүлінген стикер лақтырылады, жаңа, тұтас стикер алынады. Қаптаманың сыртқы түрі мінсіз болуы тиіс.', emoji: '' },
+            { type: 'slide', stepName: 'Қателер', title: 'Егер стикер бүлінсе 🛠️', content: `<div class="infographic-list"><div class="infographic-item border-red"><span style="font-size:22px;">🚫</span><div><b>Жабыстырмаңыз</b> бүлінген стикерді</div></div><div class="infographic-item"><span style="font-size:22px;">✅</span><div><b>Жаңа, тұтас</b> стикер алыңыз</div></div><div class="infographic-item"><span style="font-size:22px;">✨</span><div>Қаптама <b>мінсіз</b> болуы тиіс</div></div></div>`, emoji: '' },
             { type: 'question', question: 'Егер стикер кездейсоқ бүлінсе, не істеу керек?', options: ['Түзеп, кері жабыстыру', 'Жаңа тұтас стикер алу', 'Сол күйінде қалдыру'], correct: 1, success: '✅ Дұрыс! Тек жаңа стикер. Сапа бәрінен жоғары.', fail: '❌ Жаңа стикер аламыз. Бүлінген жапсырмаларды жабыстыруға болмайды.' },
             { type: 'complete', stepName: 'Бекіту', title: '🎉 Сіз курсты аяқтадыңыз', content: 'Құттықтаймыз! Сіз барлық ережелерді білдіңіз: дұрыс контейнер, стикердің нақты орны және қателіктер кезіндегі әрекеттер. Ұқыптылық қонақта ең жақсы әсер қалдырады.', emoji: '' }
         ]
@@ -442,22 +454,17 @@
         gameSteps = gameStepsTranslations[lang];
         const t = translations[lang];
 
-        // Обновляем статический HTML (используем innerHTML для строк с цветами)
         document.getElementById('lbl_mainTitle').textContent = t.mainTitle;
         document.getElementById('lbl_bannerText').textContent = t.bannerText;
         document.getElementById('lbl_btnTrain').textContent = t.btnTrain;
         document.getElementById('lbl_badgeStandard').textContent = t.badgeStandard;
         document.getElementById('lbl_badgeRolls').textContent = t.badgeRolls;
         document.getElementById('lbl_row1').textContent = t.row1;
-        
-        // Здесь исправление: innerHTML для сохранения тегов <span> и <strong>
         document.getElementById('lbl_row2').innerHTML = t.row2;
         document.getElementById('lbl_row3').innerHTML = t.row3;
-        
         document.getElementById('lbl_modalTitle').textContent = t.modalTitle;
         document.getElementById('lbl_score').textContent = t.score;
         
-        // Скрываем оверлей языка и показываем сайт
         document.getElementById('langSelectionOverlay').style.display = 'none';
         document.getElementById('mainContainer').style.display = 'block';
     }
@@ -477,7 +484,6 @@
         let totalQuestions = 0;
         let isLocked = false;
 
-        // Подсчет общего количества вопросов
         function getTotalQuestions() {
             let count = 0;
             gameSteps.forEach(step => { if(step.type === 'question') count++; });
