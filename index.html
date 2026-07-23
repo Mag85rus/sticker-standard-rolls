@@ -8,6 +8,21 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Yandex.Metrika counter -->
+    <script type="text/javascript">
+        (function(m,e,t,r,i,k,a){
+            m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+            m[i].l=1*new Date();
+            for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+            k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)
+        })(window, document,'script','https://mc.yandex.ru/metrika/tag.js?id=110979605', 'ym');
+    
+        ym(110979605, 'init', {ssr:true, webvisor:true, clickmap:true, ecommerce:"dataLayer", referrer: document.referrer, url: location.href, accurateTrackBounce:true, trackLinks:true});
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/110979605" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    <!-- /Yandex.Metrika counter -->
+
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
@@ -57,9 +72,10 @@
         .banner-text { display: flex; align-items: center; gap: 10px; font-weight: 600; color: #1a1a1a; }
         .banner-text i { color: #C74100; font-size: 18px; }
 
-        /* --- Кнопка (Желтая точка) --- */
+        /* --- Кнопка (Желтая точка, увеличена ширина до 200px) --- */
         .btn-wrapper {
-            --width: 180px; --height: 48px; --padding: 6px;
+            --width: 200px; /* Расширено для всех языков */
+            --height: 48px; --padding: 6px;
             --border-radius: 24px; --dot-size: 8px;
             --btn-color: #e4e4e4; --hue: 55deg; /* Желтый */
             --animation-duration: 1.2s;
@@ -187,9 +203,10 @@
             .header-title { font-size: 22px; }
             .header { flex-direction: column; align-items: flex-start; }
             .header-right-group { width: 100%; justify-content: space-between; }
-            .content { flex-direction: column-reverse; align-items: center; }
+            .content { flex-direction: column-reverse; align-items: center; gap: 20px; }
             .media-wrapper { max-width: 220px; width: 100%; }
             .training-banner { flex-direction: column; align-items: stretch; text-align: center; }
+            .banner-text { font-size: 14px; justify-content: center; }
             .btn-wrapper { margin: 0 auto; }
             .lang-select-container { padding: 30px 20px; margin: 15px; }
             .lang-select-title { font-size: 20px; }
@@ -200,9 +217,9 @@
         @media (max-width: 480px) {
             .container { padding: 15px; }
             .header-title { font-size: 20px; }
-            .card { padding: 20px; }
+            .card { padding: 15px; }
             .list-item { font-size: 14px; }
-            .modal-content { padding: 25px; }
+            .modal-content { padding: 20px; }
             .lang-select-container { padding: 20px 15px; }
         }
     </style>
@@ -212,8 +229,8 @@
     <!-- Экран выбора языка -->
     <div class="lang-select-overlay" id="langSelectionOverlay">
         <div class="lang-select-container">
-            <div class="lang-select-title" id="lbl_welcomeTitle">🌍 Добро пожаловать!</div>
-            <div class="lang-select-sub" id="lbl_selectLang">Пожалуйста, выберите ваш язык / Тилди тандаңыз / Tilni tanlang</div>
+            <div class="lang-select-title">🌍 Добро пожаловать!</div>
+            <div class="lang-select-sub">Пожалуйста, выберите ваш язык / Тилди тандаңыз / Tilni tanlang</div>
             <div class="lang-grid">
                 <button class="lang-btn" onclick="setLanguage('ru')">🇷🇺 Русский</button>
                 <button class="lang-btn" onclick="setLanguage('ky')">🇰🇬 Кыргызча</button>
@@ -294,7 +311,7 @@
     </div>
 
 <script>
-    // --- 1. Объекты с переводами (добавлены переводы для кнопок и приветствия) ---
+    // --- 1. Объекты с переводами (включая все кнопки) ---
     
     const translations = {
         ru: {
@@ -308,12 +325,11 @@
             row3: 'Стикер на крышку, <strong class="bold-text">строго сбоку</strong> <span class="highlight-red">на стороне имбиря и васаби</span>',
             modalTitle: "📦 Инструкция по стандарту",
             score: "Очки:",
-            // Новые строки для кнопок и оверлея
-            welcomeTitle: "🌍 Добро пожаловать!",
-            selectLang: "Пожалуйста, выберите ваш язык",
-            startBtnText: "Начать обучение 🚀",
-            nextBtnText: "Дальше ➡️",
-            completeBtn: "Завершить курс"
+            nextBtn: "Продолжить →",
+            completeBtn: "Завершить курс",
+            btnStartCourse: "Начать обучение 🚀",
+            btnNextSlide: "Дальше ➡️",
+            scoreOutOf: " из 100!"
         },
         ky: {
             mainTitle: "ТЕРМОСТИКЕР_ Роллдор",
@@ -326,11 +342,11 @@
             row3: 'Этикетканы капкакка, <strong class="bold-text">капталынан</strong> <span class="highlight-red">имбирь/васаби жактан</span>',
             modalTitle: "📦 Стандарт боюнча нускама",
             score: "Упайлар:",
-            welcomeTitle: "🌍 Кош келиңиз!",
-            selectLang: "Сураныч, тилиңизди тандаңыз",
-            startBtnText: "Окутууну баштоо 🚀",
-            nextBtnText: "Ары карай ➡️",
-            completeBtn: "Курсту бүтүрүү"
+            nextBtn: "Улантуу →",
+            completeBtn: "Курсту бүтүрүү",
+            btnStartCourse: "Окутууну баштоо 🚀",
+            btnNextSlide: "Ары ➡️",
+            scoreOutOf: " 100дөн!"
         },
         uz: {
             mainTitle: "ТЕРМОСТИКЕР_ Rollar",
@@ -343,11 +359,11 @@
             row3: 'Stiker qopqoqqa, <strong class="bold-text">qat\'iy yon tomondan</strong> <span class="highlight-red">zanjabil/vasabi tomonidan</span>',
             modalTitle: "📦 Standart bo'yicha yo'riqnoma",
             score: "Ballar:",
-            welcomeTitle: "🌍 Xush kelibsiz!",
-            selectLang: "Iltimos, tilingizni tanlang",
-            startBtnText: "Treningni boshlash 🚀",
-            nextBtnText: "Davom etish ➡️",
-            completeBtn: "Kursni yakunlash"
+            nextBtn: "Davom etish →",
+            completeBtn: "Kursni yakunlash",
+            btnStartCourse: "Treningni boshlash 🚀",
+            btnNextSlide: "Keyingi ➡️",
+            scoreOutOf: " 100 dan!"
         },
         tj: {
             mainTitle: "ТЕРМОСТИКЕР_ Роллҳо",
@@ -360,11 +376,11 @@
             row3: 'Стикер ба сарпӯш, <strong class="bold-text">аз паҳлӯ</strong> <span class="highlight-red">аз тарафи занҷабил/васаби</span>',
             modalTitle: "📦 Дастури стандарт",
             score: "Холҳо:",
-            welcomeTitle: "🌍 Хуш омадед!",
-            selectLang: "Лутфан, забони худро интихоб кунед",
-            startBtnText: "Омӯзишро оғоз кардан 🚀",
-            nextBtnText: "Идома ➡️",
-            completeBtn: "Курсро ба охир расондан"
+            nextBtn: "Идома →",
+            completeBtn: "Курсро ба охир расондан",
+            btnStartCourse: "Оғоз кардани омӯзиш 🚀",
+            btnNextSlide: "Баъдӣ ➡️",
+            scoreOutOf: " аз 100!"
         },
         kz: {
             mainTitle: "ТЕРМОСТИКЕР_ Роллдар",
@@ -377,46 +393,24 @@
             row3: 'Стикер қақпаққа, <strong class="bold-text">шетінен</strong> <span class="highlight-red">имбирь/васаби жағынан</span>',
             modalTitle: "📦 Стандарт бойынша нұсқаулық",
             score: "Ұпайлар:",
-            welcomeTitle: "🌍 Қош келдіңіз!",
-            selectLang: "Өтінемін, тіліңізді таңдаңыз",
-            startBtnText: "Оқытуды бастау 🚀",
-            nextBtnText: "Жалғастыру ➡️",
-            completeBtn: "Курсты аяқтау"
+            nextBtn: "Жалғастыру →",
+            completeBtn: "Курсты аяқтау",
+            btnStartCourse: "Оқытуды бастау 🚀",
+            btnNextSlide: "Келесі ➡️",
+            scoreOutOf: " 100-ден!"
         }
     };
 
-    // Массивы для обучения (Красочная инфографика, короткие тексты, все 4 контейнера в вопросе)
+    // Массивы для обучения
     const gameStepsTranslations = {
         ru: [
             { type: 'welcome', title: 'Стандарт упаковки', content: 'Изучите главные правила размещения стикера. В конце ответьте на 3 вопроса.', stepName: 'Введение' },
-            
-            { type: 'slide', stepName: 'Важность', title: 'Почему это важно? 🧐', content: `
-                <div class="infographic-list">
-                    <div class="infographic-item"><span style="font-size:22px;">👀</span><div><b>Первое впечатление</b> гостя</div></div>
-                    <div class="infographic-item"><span style="font-size:22px;">🤝</span><div><b>Доверие</b> к ресторану</div></div>
-                    <div class="infographic-item"><span style="font-size:22px;">⭐</span><div><b>Репутация</b> ресторана</div></div>
-                </div>`, emoji: '' },
-            
-            { type: 'slide', stepName: 'Инструкция', title: '3 простых правила 📋', content: `
-                <div class="infographic-list">
-                    <div class="infographic-item border-red"><span style="font-size:22px;">📦</span><div><b>Контейнер:</b> Роллы в <br><span class="container-tag">ПК · 34</span><span class="container-tag">ПК · 34/8</span><span class="container-tag">ПК · 35</span><span class="container-tag">ПК · 36</span></div></div>
-                    <div class="infographic-item"><span style="font-size:22px;">📍</span><div><b>Место:</b> Исключительно на крышку</div></div>
-                    <div class="infographic-item border-red"><span style="font-size:22px;">👈</span><div><b>Расположение:</b> Строго сбоку, со стороны имбиря/васаби</div></div>
-                </div>`, emoji: '' },
-
+            { type: 'slide', stepName: 'Важность', title: 'Почему это важно? 🧐', content: `<div class="infographic-list"><div class="infographic-item"><span style="font-size:22px;">👀</span><div><b>Первое впечатление</b> гостя</div></div><div class="infographic-item"><span style="font-size:22px;">🤝</span><div><b>Доверие</b> к ресторану</div></div><div class="infographic-item"><span style="font-size:22px;">⭐</span><div><b>Репутация</b> ресторана</div></div></div>`, emoji: '' },
+            { type: 'slide', stepName: 'Инструкция', title: '3 простых правила 📋', content: `<div class="infographic-list"><div class="infographic-item border-red"><span style="font-size:22px;">📦</span><div><b>Контейнер:</b> Роллы в <br><span class="container-tag">ПК · 34</span><span class="container-tag">ПК · 34/8</span><span class="container-tag">ПК · 35</span><span class="container-tag">ПК · 36</span></div></div><div class="infographic-item"><span style="font-size:22px;">📍</span><div><b>Место:</b> Исключительно на крышку</div></div><div class="infographic-item border-red"><span style="font-size:22px;">👈</span><div><b>Расположение:</b> Строго сбоку, со стороны имбиря/васаби</div></div></div>`, emoji: '' },
             { type: 'question', question: 'Для каких контейнеров действует правило "стикер на крышку сбоку"?', options: ['Роллы ПК · 35 и ПК · 36', 'Роллы ПК · 34, ПК · 34/8, ПК · 35, ПК · 36', 'Только ПК · 34'], correct: 1, success: '✅ Верно! Правило действует для всех четырех: ПК · 34, 34/8, 35 и 36.', fail: '❌ Ошибка. Стандарт распространяется на ПК · 34, 34/8, 35 и 36.' },
-            
             { type: 'question', question: 'Куда именно на упаковке нужно клеить стикер?', options: ['Сбоку или на дно контейнера', 'На крышку, строго сбоку, со стороны имбиря/васаби', 'По центру крышки'], correct: 1, success: '✅ Идеально! Клеим строго сбоку, со стороны имбиря/васаби.', fail: '❌ Место одно: крышка, строго сбоку, со стороны имбиря/васаби.' },
-            
-            { type: 'slide', stepName: 'Ошибки', title: 'Если стикер испорчен 🛠️', content: `
-                <div class="infographic-list">
-                    <div class="infographic-item border-red"><span style="font-size:22px;">🚫</span><div><b>Не клеим</b> испорченный стикер обратно</div></div>
-                    <div class="infographic-item"><span style="font-size:22px;">✅</span><div>Берем <b>новый, целый</b> стикер</div></div>
-                    <div class="infographic-item"><span style="font-size:22px;">✨</span><div>Упаковка должна быть <b>безупречной</b></div></div>
-                </div>`, emoji: '' },
-
+            { type: 'slide', stepName: 'Ошибки', title: 'Если стикер испорчен 🛠️', content: `<div class="infographic-list"><div class="infographic-item border-red"><span style="font-size:22px;">🚫</span><div><b>Не клеим</b> испорченный стикер обратно</div></div><div class="infographic-item"><span style="font-size:22px;">✅</span><div>Берем <b>новый, целый</b> стикер</div></div><div class="infographic-item"><span style="font-size:22px;">✨</span><div>Упаковка должна быть <b>безупречной</b></div></div></div>`, emoji: '' },
             { type: 'question', question: 'Что делать, если стикер случайно испортился?', options: ['Расправить и приклеить обратно', 'Взять новый целый стикер', 'Оставить как есть'], correct: 1, success: '✅ Верно! Только новый стикер. Качество превыше всего.', fail: '❌ Берем новый стикер. Испорченные наклейки клеить нельзя.' },
-            
             { type: 'complete', stepName: 'Закрепление', title: '🎉 Вы завершили курс', content: 'Поздравляем! Вы прошли инструкцию и теперь знаете все правила: правильный контейнер, точное место наклейки и действия при ошибках. Аккуратность создает лучшее впечатление у гостя.', emoji: '' }
         ],
         ky: [
@@ -481,15 +475,11 @@
         document.getElementById('lbl_modalTitle').textContent = t.modalTitle;
         document.getElementById('lbl_score').textContent = t.score;
         
-        // Обновляем оверлей языка
-        document.getElementById('lbl_welcomeTitle').textContent = t.welcomeTitle;
-        document.getElementById('lbl_selectLang').textContent = t.selectLang;
-        
         document.getElementById('langSelectionOverlay').style.display = 'none';
         document.getElementById('mainContainer').style.display = 'block';
     }
 
-    // --- 3. Логика Мини-курса ---
+    // --- 3. Логика Мини-курса (с исправленными переводами кнопок) ---
     document.addEventListener('DOMContentLoaded', () => {
         const modal = document.getElementById('gameModal');
         const startBtn = document.getElementById('startGameBtn');
@@ -513,7 +503,6 @@
 
         function renderStep() {
             const step = gameSteps[currentStep];
-            const t = translations[currentLang]; // Получаем текущие переводы
             let html = '';
             isLocked = false;
 
@@ -531,7 +520,8 @@
                         <div class="info-text">${step.content}</div>
                     </div>
                 `;
-                nextBtn.textContent = t.startBtnText || 'Начать обучение 🚀';
+                // Перевод для кнопки "Начать обучение"
+                nextBtn.textContent = translations[currentLang].btnStartCourse;
                 nextBtn.className = 'btn-next show';
                 closeBtn.className = 'btn-close-modal';
             } 
@@ -546,7 +536,8 @@
                         <div class="info-text">${step.content}</div>
                     </div>
                 `;
-                nextBtn.textContent = t.nextBtnText || 'Дальше ➡️';
+                // Перевод для кнопки "Дальше"
+                nextBtn.textContent = translations[currentLang].btnNextSlide;
                 nextBtn.className = 'btn-next show';
                 closeBtn.className = 'btn-close-modal';
                 nextBtn.onclick = () => { currentStep++; renderStep(); };
@@ -581,13 +572,13 @@
                         <div class="info-text">${step.content}</div>
                         <div style="margin-top: 20px; background: #fff; padding: 15px; border-radius: 15px; text-align: center; border: 1px solid #c8e6c9;">
                             <span style="font-size: 24px; font-weight: 700; color: #1e5f2a;">
-                                ${t.score.replace(':', '')} ${finalScore} из 100!
+                                ${translations[currentLang].score.replace(':', '')} ${finalScore}${translations[currentLang].scoreOutOf}
                             </span>
                         </div>
                     </div>
                 `;
                 nextBtn.className = 'btn-close-modal';
-                closeBtn.textContent = t.completeBtn;
+                closeBtn.textContent = translations[currentLang].completeBtn;
                 closeBtn.className = 'btn-close-modal show';
             }
 
@@ -616,7 +607,6 @@
             const step = gameSteps[currentStep];
             const feedbackBox = document.getElementById('feedbackBox');
             const allOptions = document.querySelectorAll('.option-btn');
-            const t = translations[currentLang];
 
             allOptions.forEach(btn => btn.disabled = true);
 
@@ -637,7 +627,8 @@
             let currentScore = Math.round((correctAnswers / totalQuestions) * 100);
             scoreDisplay.textContent = `${currentScore}`;
 
-            nextBtn.textContent = t.nextBtnText || 'Дальше ➡️';
+            // Исправление перевода кнопки "Дальше" при выборе ответа
+            nextBtn.textContent = translations[currentLang].btnNextSlide;
             nextBtn.className = 'btn-next show';
             nextBtn.onclick = () => { currentStep++; renderStep(); };
         }
@@ -652,20 +643,5 @@
         window.addEventListener('click', (e) => { if (e.target === modal) { modal.style.display = 'none'; } });
     });
 </script>
-
-<!-- Yandex.Metrika counter -->
-<script type="text/javascript">
-    (function(m,e,t,r,i,k,a){
-        m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
-        m[i].l=1*new Date();
-        for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
-        k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)
-    })(window, document,'script','https://mc.yandex.ru/metrika/tag.js?id=110979605', 'ym');
-
-    ym(110979605, 'init', {ssr:true, webvisor:true, clickmap:true, ecommerce:"dataLayer", referrer: document.referrer, url: location.href, accurateTrackBounce:true, trackLinks:true});
-</script>
-<noscript><div><img src="https://mc.yandex.ru/watch/110979605" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
-<!-- /Yandex.Metrika counter -->
-
 </body>
 </html>
