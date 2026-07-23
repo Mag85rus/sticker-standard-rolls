@@ -212,8 +212,8 @@
     <!-- Экран выбора языка -->
     <div class="lang-select-overlay" id="langSelectionOverlay">
         <div class="lang-select-container">
-            <div class="lang-select-title">🌍 Добро пожаловать!</div>
-            <div class="lang-select-sub">Пожалуйста, выберите ваш язык / Тилди тандаңыз / Tilni tanlang</div>
+            <div class="lang-select-title" id="lbl_welcomeTitle">🌍 Добро пожаловать!</div>
+            <div class="lang-select-sub" id="lbl_selectLang">Пожалуйста, выберите ваш язык / Тилди тандаңыз / Tilni tanlang</div>
             <div class="lang-grid">
                 <button class="lang-btn" onclick="setLanguage('ru')">🇷🇺 Русский</button>
                 <button class="lang-btn" onclick="setLanguage('ky')">🇰🇬 Кыргызча</button>
@@ -294,7 +294,7 @@
     </div>
 
 <script>
-    // --- 1. Объекты с переводами (инфографика, меньше текста, исправленные вопросы) ---
+    // --- 1. Объекты с переводами (добавлены переводы для кнопок и приветствия) ---
     
     const translations = {
         ru: {
@@ -308,7 +308,11 @@
             row3: 'Стикер на крышку, <strong class="bold-text">строго сбоку</strong> <span class="highlight-red">на стороне имбиря и васаби</span>',
             modalTitle: "📦 Инструкция по стандарту",
             score: "Очки:",
-            nextBtn: "Продолжить →",
+            // Новые строки для кнопок и оверлея
+            welcomeTitle: "🌍 Добро пожаловать!",
+            selectLang: "Пожалуйста, выберите ваш язык",
+            startBtnText: "Начать обучение 🚀",
+            nextBtnText: "Дальше ➡️",
             completeBtn: "Завершить курс"
         },
         ky: {
@@ -322,7 +326,10 @@
             row3: 'Этикетканы капкакка, <strong class="bold-text">капталынан</strong> <span class="highlight-red">имбирь/васаби жактан</span>',
             modalTitle: "📦 Стандарт боюнча нускама",
             score: "Упайлар:",
-            nextBtn: "Улантуу →",
+            welcomeTitle: "🌍 Кош келиңиз!",
+            selectLang: "Сураныч, тилиңизди тандаңыз",
+            startBtnText: "Окутууну баштоо 🚀",
+            nextBtnText: "Ары карай ➡️",
             completeBtn: "Курсту бүтүрүү"
         },
         uz: {
@@ -336,7 +343,10 @@
             row3: 'Stiker qopqoqqa, <strong class="bold-text">qat\'iy yon tomondan</strong> <span class="highlight-red">zanjabil/vasabi tomonidan</span>',
             modalTitle: "📦 Standart bo'yicha yo'riqnoma",
             score: "Ballar:",
-            nextBtn: "Davom etish →",
+            welcomeTitle: "🌍 Xush kelibsiz!",
+            selectLang: "Iltimos, tilingizni tanlang",
+            startBtnText: "Treningni boshlash 🚀",
+            nextBtnText: "Davom etish ➡️",
             completeBtn: "Kursni yakunlash"
         },
         tj: {
@@ -350,7 +360,10 @@
             row3: 'Стикер ба сарпӯш, <strong class="bold-text">аз паҳлӯ</strong> <span class="highlight-red">аз тарафи занҷабил/васаби</span>',
             modalTitle: "📦 Дастури стандарт",
             score: "Холҳо:",
-            nextBtn: "Идома →",
+            welcomeTitle: "🌍 Хуш омадед!",
+            selectLang: "Лутфан, забони худро интихоб кунед",
+            startBtnText: "Омӯзишро оғоз кардан 🚀",
+            nextBtnText: "Идома ➡️",
             completeBtn: "Курсро ба охир расондан"
         },
         kz: {
@@ -364,7 +377,10 @@
             row3: 'Стикер қақпаққа, <strong class="bold-text">шетінен</strong> <span class="highlight-red">имбирь/васаби жағынан</span>',
             modalTitle: "📦 Стандарт бойынша нұсқаулық",
             score: "Ұпайлар:",
-            nextBtn: "Жалғастыру →",
+            welcomeTitle: "🌍 Қош келдіңіз!",
+            selectLang: "Өтінемін, тіліңізді таңдаңыз",
+            startBtnText: "Оқытуды бастау 🚀",
+            nextBtnText: "Жалғастыру ➡️",
             completeBtn: "Курсты аяқтау"
         }
     };
@@ -465,6 +481,10 @@
         document.getElementById('lbl_modalTitle').textContent = t.modalTitle;
         document.getElementById('lbl_score').textContent = t.score;
         
+        // Обновляем оверлей языка
+        document.getElementById('lbl_welcomeTitle').textContent = t.welcomeTitle;
+        document.getElementById('lbl_selectLang').textContent = t.selectLang;
+        
         document.getElementById('langSelectionOverlay').style.display = 'none';
         document.getElementById('mainContainer').style.display = 'block';
     }
@@ -493,6 +513,7 @@
 
         function renderStep() {
             const step = gameSteps[currentStep];
+            const t = translations[currentLang]; // Получаем текущие переводы
             let html = '';
             isLocked = false;
 
@@ -510,7 +531,7 @@
                         <div class="info-text">${step.content}</div>
                     </div>
                 `;
-                nextBtn.textContent = 'Начать обучение 🚀';
+                nextBtn.textContent = t.startBtnText || 'Начать обучение 🚀';
                 nextBtn.className = 'btn-next show';
                 closeBtn.className = 'btn-close-modal';
             } 
@@ -525,7 +546,7 @@
                         <div class="info-text">${step.content}</div>
                     </div>
                 `;
-                nextBtn.textContent = 'Дальше ➡️';
+                nextBtn.textContent = t.nextBtnText || 'Дальше ➡️';
                 nextBtn.className = 'btn-next show';
                 closeBtn.className = 'btn-close-modal';
                 nextBtn.onclick = () => { currentStep++; renderStep(); };
@@ -560,13 +581,13 @@
                         <div class="info-text">${step.content}</div>
                         <div style="margin-top: 20px; background: #fff; padding: 15px; border-radius: 15px; text-align: center; border: 1px solid #c8e6c9;">
                             <span style="font-size: 24px; font-weight: 700; color: #1e5f2a;">
-                                ${translations[currentLang].score.replace(':', '')} ${finalScore} из 100!
+                                ${t.score.replace(':', '')} ${finalScore} из 100!
                             </span>
                         </div>
                     </div>
                 `;
                 nextBtn.className = 'btn-close-modal';
-                closeBtn.textContent = translations[currentLang].completeBtn;
+                closeBtn.textContent = t.completeBtn;
                 closeBtn.className = 'btn-close-modal show';
             }
 
@@ -595,6 +616,7 @@
             const step = gameSteps[currentStep];
             const feedbackBox = document.getElementById('feedbackBox');
             const allOptions = document.querySelectorAll('.option-btn');
+            const t = translations[currentLang];
 
             allOptions.forEach(btn => btn.disabled = true);
 
@@ -615,7 +637,7 @@
             let currentScore = Math.round((correctAnswers / totalQuestions) * 100);
             scoreDisplay.textContent = `${currentScore}`;
 
-            nextBtn.textContent = 'Дальше ➡️';
+            nextBtn.textContent = t.nextBtnText || 'Дальше ➡️';
             nextBtn.className = 'btn-next show';
             nextBtn.onclick = () => { currentStep++; renderStep(); };
         }
@@ -630,5 +652,20 @@
         window.addEventListener('click', (e) => { if (e.target === modal) { modal.style.display = 'none'; } });
     });
 </script>
+
+<!-- Yandex.Metrika counter -->
+<script type="text/javascript">
+    (function(m,e,t,r,i,k,a){
+        m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();
+        for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+        k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)
+    })(window, document,'script','https://mc.yandex.ru/metrika/tag.js?id=110979605', 'ym');
+
+    ym(110979605, 'init', {ssr:true, webvisor:true, clickmap:true, ecommerce:"dataLayer", referrer: document.referrer, url: location.href, accurateTrackBounce:true, trackLinks:true});
+</script>
+<noscript><div><img src="https://mc.yandex.ru/watch/110979605" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+<!-- /Yandex.Metrika counter -->
+
 </body>
 </html>
